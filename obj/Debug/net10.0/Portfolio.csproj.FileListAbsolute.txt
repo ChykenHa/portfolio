@@ -94,5 +94,5 @@ D:\Portfolio\obj\Debug\net10.0\Portfolio.pdb
 D:\Portfolio\obj\Debug\net10.0\Portfolio.genruntimeconfig.cache
 D:\Portfolio\obj\Debug\net10.0\ref\Portfolio.dll
 D:\Portfolio\obj\Debug\net10.0\compressed\3ugwxk5xxo-{0}-buiolxt4hy-buiolxt4hy.gz
-D:\Portfolio\obj\Debug\net10.0\compressed\iqpjnti66a-{0}-ebee0xqh1s-ebee0xqh1s.gz
 d:\Portfolio\obj\Debug\net10.0\Portfolio.sourcelink.json
+D:\Portfolio\obj\Debug\net10.0\compressed\iqpjnti66a-{0}-adybhastk0-adybhastk0.gz
