@@ -56,15 +56,15 @@ if not html_content:
 # 4. Strip .NET 10 static web assets version fingerprints from paths
 processed_html = html_content
 
-# We want to replace `/css/portfolio.[hash].css` with `css/portfolio.css`
-processed_html = re.sub(r'href="/css/portfolio\.[a-zA-Z0-9]+\.css"', 'href="css/portfolio.css"', processed_html)
-processed_html = re.sub(r'src="/js/portfolio\.[a-zA-Z0-9]+\.js"', 'src="js/portfolio.js"', processed_html)
-processed_html = re.sub(r'src="/images/avatar\.[a-zA-Z0-9]+\.jpg"', 'src="images/avatar.jpg"', processed_html)
+# We want to replace `/css/portfolio.[hash].css` with `css/portfolio.css?v=1.0.2`
+processed_html = re.sub(r'href="/css/portfolio\.[a-zA-Z0-9]+\.css"', 'href="css/portfolio.css?v=1.0.2"', processed_html)
+processed_html = re.sub(r'src="/js/portfolio\.[a-zA-Z0-9]+\.js"', 'src="js/portfolio.js?v=1.0.2"', processed_html)
+processed_html = re.sub(r'src="/images/avatar\.[a-zA-Z0-9]+\.jpg"', 'src="images/avatar.jpg?v=1.0.2"', processed_html)
 
 # Handle cases where quotes or formatting differs:
-processed_html = re.sub(r'/css/portfolio\.[a-zA-Z0-9]+\.css', 'css/portfolio.css', processed_html)
-processed_html = re.sub(r'/js/portfolio\.[a-zA-Z0-9]+\.js', 'js/portfolio.js', processed_html)
-processed_html = re.sub(r'/images/avatar\.[a-zA-Z0-9]+\.jpg', 'images/avatar.jpg', processed_html)
+processed_html = re.sub(r'/css/portfolio\.[a-zA-Z0-9]+\.css', 'css/portfolio.css?v=1.0.2', processed_html)
+processed_html = re.sub(r'/js/portfolio\.[a-zA-Z0-9]+\.js', 'js/portfolio.js?v=1.0.2', processed_html)
+processed_html = re.sub(r'/images/avatar\.[a-zA-Z0-9]+\.jpg', 'images/avatar.jpg?v=1.0.2', processed_html)
 
 # Handle the PDF CV which also might get fingerprinted
 processed_html = re.sub(r'href="/Le-Phung-Ha-TopCV\.vn-250526\.75757\.[a-zA-Z0-9]+\.pdf"', 'href="Le-Phung-Ha-TopCV.vn-250526.75757.pdf"', processed_html)
