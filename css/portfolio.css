@@ -811,7 +811,8 @@ input, textarea, button {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: inherit;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation: rotateBlob 9s linear infinite alternate;
     transition: var(--transition-smooth);
 }
 .avatar-fallback:hover .avatar-img {
