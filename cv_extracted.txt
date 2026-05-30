@@ -1,0 +1,78 @@
+Le Phung Ha
+Software Developer Intern
+ 034 737 2061 ✉ lephungha1203@gmail.com Github: ChykenHa (Lê Phùng Hà)  Hoa Khanh Nam, Da Nang, Vietnam
+CAREER OBJECTIVE
+Aspiring C# Developer seeking an internship position to apply academic knowledge, improve programming skills, and gain real-world
+experience in software development.
+Seeking a Backend Developer Intern position specializing in ASP.NET Core and database systems.
+EDUCATION
+Duy Tan University 2023 - 2027
+Software Engineer
+GPA 3.25/4
+Relevant coursework:
+• Data Structures & Algorithms
+• Database Systems
+• Web Development
+RESEARCH EXPERIENCE
+MindConnect – Depression Detection Social Network -
+Role: Independent Researcher & Developer
+Student research symposium on Information Technology
+• Independently conducted research on detecting depression signals from user-generated text
+• Designed and developed a cross-platform system including:
+• Web application using ASP.NET Core
+• Mobile application using ReactNative to Android and IOS
+• Built a unified backend system to support both platforms simultaneously
+• Trained machine learning models using Python for text classification and sentiment analysis
+• Applied NLP techniques to identify depression-related patterns in user content
+• Integrated AI services (OpenAI GPT & Google Gemini) for chatbot and mental health support
+• Designed RESTful APIs for communication between web and mobile applications
+• Implemented authentication, user interaction (posts, comments), and real-time features
+Git: ChykenHa/Depression-Detection-Social-Network at master
+Web Demo: https://depression-detection-social-network.onrender.com/
+PROJECTS
+Student Progress Management System -
+Role: Technical Team Leader & Backend Developer
+Tech: ASP.NET Core, Entity Framework Core, SQL Server, Razor Pages
+• Led a team of X members to develop a student academic management system
+• Designed system architecture and assigned tasks to team members
+• Developed core backend features using ASP.NET Core
+• Implemented role-based authentication (Admin, Lecturer, Student)
+• Built dashboards and academic tracking functionalities
+• Designed and managed database using SQL Server and Entity Framework Core
+• Reviewed code and ensured overall project quality
+ChykenHa/QuanLyTienDoSinhVien
+E-commerce Website -
+Role: Fullstack Developer
+Tech: ASP.NET, SQL Server, Entity Framework, Bootstrap, JavaScript
+• Built an online shopping website with core e-commerce functionalities
+• Developed features: product management, shopping cart, order processing
+• Integrated user authentication and admin management system
+• Designed responsive UI using Bootstrap
+• Managed database operations with SQL Server and ORM (Entity Framework)
+ChykenHa/Ecommerce: Ecommerce website with ASP.NET
+Movie Android Application -
+Role: Mobile Developer
+Tech: Java, Kotlin, Android Studio, Retrofit, MVVM
+• Developed an Android application for browsing and searching movies
+• Implemented features: movie listing, search, and detailed information display
+• Applied MVVM architecture for better code structure
+• Integrated APIs using Retrofit for fetching movie data
+• Designed responsive UI with Material Design components
+• Used LiveData and ViewModel for state management
+ChykenHa/MyAndroidAPP: App chiếu phim đơn giản, -java, sql, android studio
+SKILLS
+Technical Skills: • Programming: C#, Java, SQL
+• Frameworks: ASP.NET Core
+• Database: SQL Server, MongoDB
+• Tools: Git, Docker, Visual Studio
+Soft Skills: • Teamwork
+• Problem-solving
+• Time management
+ 
+CERTIFICATIONS
+IELTS - Band 6.5 2023
+TOEIC 2026
+HONORS & AWARDS
+Third Student Project Award- STUDENT RESEARCH SYMPOSIUM ON INFORMATION
+TECHNOLOGY
+2026

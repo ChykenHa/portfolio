@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Le Phung Ha - Portfolio. Backend Developer & DevOps Intern specializing in ASP.NET Core and AI/NLP integration." />
+    <title>@ViewData["Title"] - Le Phung Ha | Software Developer Portfolio</title>
+    
+    <!-- Google Fonts: Space Grotesk (headings) & Sora (body/accents) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/css/portfolio.css" asp-append-version="true" />
+</head>
+<body class="dark-ocean-theme">
+    
+    <!-- Bioluminescent Background Canvas -->
+    <canvas id="ocean-particles"></canvas>
+    
+    <!-- Morphing Liquid Blobs (Liquid Glass Foundation) -->
+    <div class="liquid-blob blob-1"></div>
+    <div class="liquid-blob blob-2"></div>
+    <div class="liquid-blob blob-3"></div>
+    <div class="liquid-blob blob-4"></div>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon"><i class="fa-solid fa-water"></i></span>
+                <span class="logo-text">LE PHUNG HA<span class="highlight">.</span></span>
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="#hero" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#research" class="nav-link">Research</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            
+            <div class="nav-actions">
+                <a href="~/Le-Phung-Ha-TopCV.vn-250526.75757.pdf" target="_blank" class="btn btn-nav-download">
+                    <span>Download CV <i class="fa-solid fa-download"></i></span>
+                </a>
+                <button class="mobile-toggle" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <div class="scroll-progress"></div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu">
+        <a href="#hero" class="mobile-link">Home</a>
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#research" class="mobile-link">Research</a>
+        <a href="#projects" class="mobile-link">Projects</a>
+        <a href="#skills" class="mobile-link">Skills</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+        <a href="~/Le-Phung-Ha-TopCV.vn-250526.75757.pdf" target="_blank" class="btn btn-download-mobile">Download CV <i class="fa-solid fa-download"></i></a>
+    </div>
+
+    <!-- Main Content Body -->
+    @RenderBody()
+
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="container footer-container">
+            <p class="copyright">&copy; 2026 Le Phung Ha. Crafted with <span class="text-glow">Dark Ocean</span> & <i class="fa-solid fa-heart animate-pulse text-coral"></i></p>
+            <div class="footer-links">
+                <a href="#hero">Back to top</a>
+                <a href="~/Le-Phung-Ha-TopCV.vn-250526.75757.pdf" target="_blank">View CV PDF</a>
+                <a href="https://github.com/ChykenHa" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Portfolio JS -->
+    <script src="~/js/portfolio.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
