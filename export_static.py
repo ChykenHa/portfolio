@@ -6,9 +6,9 @@ import shutil
 import re
 import sys
 
-print("Starting export script...")
+print("Starting export script with version-stripping enabled...")
 
-# 1. Start the ASP.NET Core app in background, ignoring launch profiles
+# 1. Start the ASP.NET Core app in background
 cmd = ["dotnet", "run", "--no-launch-profile", "--urls", "http://localhost:5000"]
 print(f"Executing: {' '.join(cmd)}")
 process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, cwd="d:\\Portfolio")
@@ -19,7 +19,7 @@ server_started = False
 
 print("Waiting for server to report listening status...")
 start_time = time.time()
-while time.time() - start_time < 15: # Timeout after 15 seconds
+while time.time() - start_time < 15:
     line = process.stdout.readline()
     if not line:
         break
@@ -30,8 +30,8 @@ while time.time() - start_time < 15: # Timeout after 15 seconds
         break
 
 if not server_started:
-    print("Warning: Did not catch 'Now listening on' message in output. Trying to connect anyway...")
-    time.sleep(3) # safe buffer
+    print("Warning: Did not catch 'Now listening on' message. Waiting 3 seconds...")
+    time.sleep(3)
 
 html_content = ""
 try:
@@ -51,27 +51,56 @@ finally:
 
 if not html_content:
     print("Failed to get HTML content. Aborting.")
-    # Read remaining output to diagnose
-    print("Reading remaining process output:")
-    for line in process.stdout:
-        print(f"[Dotnet] {line.strip()}")
     sys.exit(1)
 
-# 4. Process paths in HTML to make them relative
+# 4. Strip .NET 10 static web assets version fingerprints from paths
 processed_html = html_content
-processed_html = processed_html.replace('href="/css/portfolio.css"', 'href="css/portfolio.css"')
-processed_html = processed_html.replace('href="/Le-Phung-Ha-TopCV.vn-250526.75757.pdf"', 'href="Le-Phung-Ha-TopCV.vn-250526.75757.pdf"')
-processed_html = processed_html.replace('src="/js/portfolio.js"', 'src="js/portfolio.js"')
-processed_html = processed_html.replace('src="/images/avatar.jpg"', 'src="images/avatar.jpg"')
 
-# Replace root-relative PDF links in general
-processed_html = re.sub(r'href="/Le-Phung-Ha-TopCV\.vn-([^"]+)\.pdf"', r'href="Le-Phung-Ha-TopCV.vn-\1.pdf"', processed_html)
+# We want to replace `/css/portfolio.[hash].css` with `css/portfolio.css`
+processed_html = re.sub(r'href="/css/portfolio\.[a-zA-Z0-9]+\.css"', 'href="css/portfolio.css"', processed_html)
+processed_html = re.sub(r'src="/js/portfolio\.[a-zA-Z0-9]+\.js"', 'src="js/portfolio.js"', processed_html)
+processed_html = re.sub(r'src="/images/avatar\.[a-zA-Z0-9]+\.jpg"', 'src="images/avatar.jpg"', processed_html)
+
+# Handle cases where quotes or formatting differs:
+processed_html = re.sub(r'/css/portfolio\.[a-zA-Z0-9]+\.css', 'css/portfolio.css', processed_html)
+processed_html = re.sub(r'/js/portfolio\.[a-zA-Z0-9]+\.js', 'js/portfolio.js', processed_html)
+processed_html = re.sub(r'/images/avatar\.[a-zA-Z0-9]+\.jpg', 'images/avatar.jpg', processed_html)
+
+# Handle the PDF CV which also might get fingerprinted
+processed_html = re.sub(r'href="/Le-Phung-Ha-TopCV\.vn-250526\.75757\.[a-zA-Z0-9]+\.pdf"', 'href="Le-Phung-Ha-TopCV.vn-250526.75757.pdf"', processed_html)
+processed_html = re.sub(r'/Le-Phung-Ha-TopCV\.vn-250526\.75757\.[a-zA-Z0-9]+\.pdf', 'Le-Phung-Ha-TopCV.vn-250526.75757.pdf', processed_html)
+
+# Let's verify that the output has been cleaned
+print("\nVerifying path cleaning in HTML:")
+if "portfolio.ebee0xqh1s.css" in processed_html or "portfolio.buiolxt4hy.js" in processed_html:
+    print("WARNING: Fingerprint hashes were not successfully cleaned!")
+else:
+    print("SUCCESS: Fingerprint hashes cleaned!")
 
 # 5. Recreate dist folder structure
 dist_dir = "d:\\Portfolio\\dist"
 if os.path.exists(dist_dir):
-    print(f"Cleaning existing {dist_dir}...")
-    shutil.rmtree(dist_dir)
+    print(f"Cleaning existing {dist_dir} (preserving .git)...")
+    import stat
+    for root, dirs, files in os.walk(dist_dir, topdown=False):
+        if '.git' in root.split(os.sep):
+            continue
+        for name in files:
+            filepath = os.path.join(root, name)
+            try:
+                os.chmod(filepath, stat.S_IWRITE)
+                os.remove(filepath)
+            except Exception as e:
+                print(f"Error removing file {filepath}: {e}")
+        for name in dirs:
+            if name == '.git':
+                continue
+            dirpath = os.path.join(root, name)
+            try:
+                os.chmod(dirpath, stat.S_IWRITE)
+                os.rmdir(dirpath)
+            except Exception as e:
+                print(f"Error removing dir {dirpath}: {e}")
 
 os.makedirs(dist_dir, exist_ok=True)
 os.makedirs(os.path.join(dist_dir, "css"), exist_ok=True)

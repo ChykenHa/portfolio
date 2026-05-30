@@ -56,17 +56,25 @@ if not os.path.exists(dist_dir):
     print("Error: dist/ folder does not exist! Please run export_static.py first.")
     sys.exit(1)
 
-# Init git inside dist/
+# Initialize or reuse git inside dist/
 dist_git = os.path.join(dist_dir, ".git")
-if os.path.exists(dist_git):
-    import shutil
-    shutil.rmtree(dist_git) # Clean inner git if any
+if not os.path.exists(dist_git):
+    run_cmd(["git", "init"], cwd=dist_dir)
+    run_cmd(["git", "checkout", "-b", "gh-pages"], cwd=dist_dir)
+    run_cmd(["git", "remote", "add", "origin", remote_url], cwd=dist_dir)
+else:
+    # Update remote
+    run_cmd(["git", "remote", "remove", "origin"], cwd=dist_dir)
+    run_cmd(["git", "remote", "add", "origin", remote_url], cwd=dist_dir)
 
-run_cmd(["git", "init"], cwd=dist_dir)
-run_cmd(["git", "checkout", "-b", "gh-pages"], cwd=dist_dir)
-run_cmd(["git", "add", "."], cwd=dist_dir)
-run_cmd(["git", "commit", "-m", "Deploy portfolio static site to GitHub Pages"], cwd=dist_dir)
-run_cmd(["git", "remote", "add", "origin", remote_url], cwd=dist_dir)
+run_cmd(["git", "add", "-A"], cwd=dist_dir)
+
+# Commit changes
+status_res = subprocess.run(["git", "status", "--porcelain"], cwd=dist_dir, stdout=subprocess.PIPE, text=True)
+if status_res.stdout.strip():
+    run_cmd(["git", "commit", "-m", "Deploy portfolio static site to GitHub Pages"], cwd=dist_dir)
+else:
+    print("No changes to commit in dist/.")
 
 # Force push to gh-pages branch
 success, err = run_cmd(["git", "push", "-f", "origin", "gh-pages"], cwd=dist_dir)
