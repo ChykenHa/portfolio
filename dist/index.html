@@ -1,295 +1,520 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Le Phung Ha - Portfolio. Backend Developer & DevOps Intern specializing in ASP.NET Core and AI/NLP integration." />
-    <title>Home - Le Phung Ha | Software Developer Portfolio</title>
-    
-    <!-- Google Fonts: Space Grotesk (headings) & Sora (body/accents) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/portfolio.css?v=1.0.2" />
-</head>
-<body class="dark-ocean-theme">
-    
-    <!-- Bioluminescent Background Canvas -->
-    <canvas b-jrjsiumu31 id="ocean-particles"></canvas>
-    
-    <!-- Morphing Liquid Blobs (Liquid Glass Foundation) -->
-    <div b-jrjsiumu31 class="liquid-blob blob-1"></div>
-    <div b-jrjsiumu31 class="liquid-blob blob-2"></div>
-    <div b-jrjsiumu31 class="liquid-blob blob-3"></div>
-    <div b-jrjsiumu31 class="liquid-blob blob-4"></div>
+    <meta name="description" content="Le Phung Ha — Software Developer Fresher specializing in C#, ASP.NET Core, Database Systems, and DevOps. Interned at Samsung R&amp;D Center Vietnam &amp; Wisdom Brain." />
+    <meta property="og:title" content="Le Phung Ha | Software Developer Portfolio" />
+    <meta property="og:description" content="Software Developer Fresher · C#, ASP.NET Core, SQL Server, Docker/Kubernetes, and AI/NLP Research." />
+    <meta property="og:type" content="website" />
+    <title>Portfolio — Le Phung Ha | Software Developer</title>
 
-    <!-- Navigation Header -->
-    <header b-jrjsiumu31 class="navbar">
-        <div b-jrjsiumu31 class="nav-container">
-            <a b-jrjsiumu31 href="#" class="logo">
-                <span b-jrjsiumu31 class="logo-icon"><i b-jrjsiumu31 class="fa-solid fa-water"></i></span>
-                <span b-jrjsiumu31 class="logo-text">LE PHUNG HA<span b-jrjsiumu31 class="highlight">.</span></span>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <!-- Zero-FOUC Theme Bootstrapper -->
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('portfolio-theme');
+                document.documentElement.dataset.theme = (saved === 'light' || saved === 'dark') ? saved : 'dark';
+            } catch (e) {
+                document.documentElement.dataset.theme = 'dark';
+            }
+        })();
+    </script>
+
+    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome 6.5.2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <!-- Portfolio Design System -->
+    <link rel="stylesheet" href="css/portfolio.css?v=2.0.0" />
+</head>
+<body>
+    <!-- Subtle Architectural Background -->
+    <div b-jrjsiumu31 class="ambient-grid" aria-hidden="true"></div>
+    <div b-jrjsiumu31 class="ambient-glow" aria-hidden="true"></div>
+
+    <!-- Scroll Progress -->
+    <div b-jrjsiumu31 class="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Floating Glass Navigation -->
+    <header b-jrjsiumu31 class="navbar" id="top-nav">
+        <div b-jrjsiumu31 class="container nav-inner">
+            <a b-jrjsiumu31 href="#hero" class="brand" aria-label="Le Phung Ha Home">
+                <span b-jrjsiumu31 class="brand-monogram">LH</span>
+                <span b-jrjsiumu31 class="brand-name">Le Phung Ha<span b-jrjsiumu31 class="brand-dot">.</span></span>
             </a>
-            
-            <nav b-jrjsiumu31 class="nav-menu">
-                <a b-jrjsiumu31 href="#hero" class="nav-link active">Home</a>
+
+            <nav b-jrjsiumu31 class="nav-links" aria-label="Primary Navigation">
                 <a b-jrjsiumu31 href="#about" class="nav-link">About</a>
+                <a b-jrjsiumu31 href="#experience" class="nav-link">Experience</a>
                 <a b-jrjsiumu31 href="#research" class="nav-link">Research</a>
                 <a b-jrjsiumu31 href="#projects" class="nav-link">Projects</a>
                 <a b-jrjsiumu31 href="#skills" class="nav-link">Skills</a>
                 <a b-jrjsiumu31 href="#contact" class="nav-link">Contact</a>
             </nav>
-            
+
             <div b-jrjsiumu31 class="nav-actions">
-                <a href="Le-Phung-Ha-TopCV.vn-250526.75757.pdf" target="_blank" class="btn btn-nav-download">
-                    <span b-jrjsiumu31>Download CV <i b-jrjsiumu31 class="fa-solid fa-download"></i></span>
+                <button b-jrjsiumu31 type="button" class="cmd-trigger" id="cmd-open-btn" aria-label="Open quick command palette">
+                    <i b-jrjsiumu31 class="fa-solid fa-magnifying-glass"></i>
+                    <span b-jrjsiumu31 class="cmd-trigger-label">Jump</span>
+                    <kbd b-jrjsiumu31>Ctrl K</kbd>
+                </button>
+
+                <button b-jrjsiumu31 type="button" class="icon-btn" id="theme-toggle" aria-label="Toggle color theme" aria-pressed="false">
+                    <i b-jrjsiumu31 class="fa-solid fa-sun theme-icon-sun" aria-hidden="true"></i>
+                    <i b-jrjsiumu31 class="fa-solid fa-moon theme-icon-moon" aria-hidden="true"></i>
+                </button>
+
+                <a href="Le-Phung-Ha-CV.pdf" target="_blank" rel="noopener" class="btn btn-primary btn-sm nav-cv-btn">
+                    <i b-jrjsiumu31 class="fa-solid fa-file-arrow-down"></i>
+                    <span b-jrjsiumu31>Download CV</span>
                 </a>
-                <button b-jrjsiumu31 class="mobile-toggle" aria-label="Toggle navigation">
-                    <i b-jrjsiumu31 class="fa-solid fa-bars"></i>
+
+                <button b-jrjsiumu31 type="button" class="icon-btn mobile-toggle" id="mobile-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-drawer">
+                    <i b-jrjsiumu31 class="fa-solid fa-bars" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
-        <div b-jrjsiumu31 class="scroll-progress"></div>
     </header>
 
-    <!-- Mobile Menu Overlay -->
-    <div b-jrjsiumu31 class="mobile-menu">
-        <a b-jrjsiumu31 href="#hero" class="mobile-link">Home</a>
-        <a b-jrjsiumu31 href="#about" class="mobile-link">About</a>
-        <a b-jrjsiumu31 href="#research" class="mobile-link">Research</a>
-        <a b-jrjsiumu31 href="#projects" class="mobile-link">Projects</a>
-        <a b-jrjsiumu31 href="#skills" class="mobile-link">Skills</a>
-        <a b-jrjsiumu31 href="#contact" class="mobile-link">Contact</a>
-        <a href="Le-Phung-Ha-TopCV.vn-250526.75757.pdf" target="_blank" class="btn btn-download-mobile">Download CV <i b-jrjsiumu31 class="fa-solid fa-download"></i></a>
+    <!-- Mobile Navigation Drawer -->
+    <div b-jrjsiumu31 class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+        <div b-jrjsiumu31 class="mobile-drawer-inner">
+            <div b-jrjsiumu31 class="mobile-drawer-header">
+                <span b-jrjsiumu31 class="brand-name">Navigation</span>
+                <button b-jrjsiumu31 type="button" class="icon-btn" id="mobile-close" aria-label="Close navigation menu">
+                    <i b-jrjsiumu31 class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <nav b-jrjsiumu31 class="mobile-nav-list" aria-label="Mobile Navigation">
+                <a b-jrjsiumu31 href="#hero" class="mobile-nav-link">Home</a>
+                <a b-jrjsiumu31 href="#about" class="mobile-nav-link">About</a>
+                <a b-jrjsiumu31 href="#experience" class="mobile-nav-link">Experience</a>
+                <a b-jrjsiumu31 href="#research" class="mobile-nav-link">Research</a>
+                <a b-jrjsiumu31 href="#projects" class="mobile-nav-link">Projects</a>
+                <a b-jrjsiumu31 href="#skills" class="mobile-nav-link">Skills</a>
+                <a b-jrjsiumu31 href="#contact" class="mobile-nav-link">Contact</a>
+            </nav>
+            <div b-jrjsiumu31 class="mobile-drawer-footer">
+                <a href="Le-Phung-Ha-CV.pdf" target="_blank" rel="noopener" class="btn btn-primary btn-block">
+                    <i b-jrjsiumu31 class="fa-solid fa-file-arrow-down"></i> Download CV (PDF)
+                </a>
+            </div>
+        </div>
     </div>
 
-    <!-- Main Content Body -->
+    <!-- Main Content -->
     
 <main>
-    <!-- Hero Section -->
+    <!-- 1. HERO SECTION -->
     <section id="hero" class="hero-section">
-        <div class="container hero-container">
-            <div class="hero-content">
-                <div class="badge-glow fade-in-up">
-                    <span class="badge-text"><i class="fa-solid fa-code-fork"></i> Backend & DevOps Engineer</span>
+        <div class="container hero-grid">
+            <div class="hero-copy">
+                <div class="status-pill reveal">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <span>Open to Software Developer &amp; Backend Roles · Da Nang, VN</span>
                 </div>
-                <h1 class="hero-title fade-in-up delay-1">
-                    Hi, I am <br>
-                    <span class="gradient-text text-glow">Le Phung Ha</span>
+
+                <h1 class="hero-title reveal">
+                    Le Phung Ha
                 </h1>
-                <p class="hero-subtitle fade-in-up delay-2">
-                    Software Engineering student at Duy Tan University. Specializing in <strong>C# & ASP.NET Core</strong>, building resilient backends, database architectures, and integrating Artificial Intelligence (AI/NLP) solutions.
+
+                <p class="hero-role reveal">
+                    Software Developer Fresher &middot; <span class="text-accent">ASP.NET Core &amp; Backend Systems</span>
                 </p>
-                <div class="hero-actions fade-in-up delay-3">
-                    <a href="#projects" class="btn btn-primary btn-glow">Explore Projects</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+
+                <p class="hero-summary reveal">
+                    Software Engineering student at <strong>Duy Tan University</strong> with hands-on internship experience at
+                    <strong>Samsung R&amp;D Center Vietnam</strong> and <strong>Wisdom Brain</strong>. Focused on building resilient C# / ASP.NET Core backends,
+                    relational databases, and containerized DevOps workflows.
+                </p>
+
+                <div class="hero-cta-row reveal">
+                    <a href="#projects" class="btn btn-primary">
+                        <span>Explore Projects</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="Le-Phung-Ha-CV.pdf" target="_blank" rel="noopener" class="btn btn-secondary">
+                        <i class="fa-solid fa-file-arrow-down"></i>
+                        <span>Download CV</span>
+                    </a>
+                    <button type="button" class="btn btn-ghost" data-copy="lephungha1203@gmail.com" data-copy-label="Email address">
+                        <i class="fa-regular fa-copy"></i>
+                        <span>Copy Email</span>
+                    </button>
                 </div>
-                
-                <div class="hero-stats fade-in-up delay-4">
-                    <div class="stat-item">
-                        <span class="stat-num">3+</span>
-                        <span class="stat-lbl">Months Interning</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-num">11+</span>
-                        <span class="stat-lbl">GitHub Repos</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-num">3.25</span>
-                        <span class="stat-lbl">University GPA</span>
-                    </div>
+
+                <div class="hero-social-row reveal">
+                    <a href="https://github.com/ChykenHa" target="_blank" rel="noopener" class="social-pill">
+                        <i class="fa-brands fa-github"></i> GitHub / ChykenHa
+                    </a>
+                    <a href="https://www.linkedin.com/in/h%C3%A0-l%C3%AA-ph%C3%B9ng-24110137b/" target="_blank" rel="noopener" class="social-pill">
+                        <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+                    </a>
+                    <span class="social-pill muted">
+                        <i class="fa-solid fa-location-dot"></i> Hoa Khanh Nam, Da Nang, Vietnam
+                    </span>
                 </div>
             </div>
-            
-            <div class="hero-visual fade-in-up delay-2">
-                <div class="ocean-sphere-wrapper">
-                    <div class="ocean-sphere">
-                        <div class="wave wave-1"></div>
-                        <div class="wave wave-2"></div>
-                        <div class="wave wave-3"></div>
-                        <div class="sphere-core">
-                            <i class="fa-solid fa-terminal sphere-icon"></i>
+
+            <!-- Identity Bento Card -->
+            <aside class="hero-bento spotlight-surface reveal" aria-label="Developer Quick Profile">
+                <div class="bento-profile-head">
+                    <div class="avatar-frame">
+                        <img src="images/avatar.jpg" alt="Le Phung Ha portrait" class="avatar-img" loading="eager" />
+                    </div>
+                    <div class="bento-profile-meta">
+                        <span class="mono-pill accent">C# / .NET · DevOps</span>
+                        <h2 class="bento-name">Le Phung Ha</h2>
+                        <p class="bento-sub">Duy Tan University (2023 &#x2013; 2027)</p>
+                    </div>
+                </div>
+
+                <div class="bento-metrics-grid">
+                        <div class="metric-tile">
+                            <span class="metric-val">2</span>
+                            <span class="metric-lbl">Tech Internships</span>
+                            <span class="metric-sub">Samsung R&amp;D &#xB7; Wisdom Brain</span>
                         </div>
-                    </div>
-                    <div class="floating-tech tech-csharp" title="C#"><span class="font-tech">C#</span></div>
-                    <div class="floating-tech tech-dotnet" title=".NET"><i class="fa-solid fa-cubes"></i></div>
-                    <div class="floating-tech tech-docker" title="Docker"><i class="fa-brands fa-docker"></i></div>
-                    <div class="floating-tech tech-database" title="SQL Server"><i class="fa-solid fa-database"></i></div>
+                        <div class="metric-tile">
+                            <span class="metric-val">3.27</span>
+                            <span class="metric-lbl">University GPA</span>
+                            <span class="metric-sub">Out of 4.0 &#xB7; DTU 2023&#x2013;2027</span>
+                        </div>
+                        <div class="metric-tile">
+                            <span class="metric-val">3rd</span>
+                            <span class="metric-lbl">Research Award</span>
+                            <span class="metric-sub">IT Symposium 2026</span>
+                        </div>
+                        <div class="metric-tile">
+                            <span class="metric-val">6.5</span>
+                            <span class="metric-lbl">IELTS Band</span>
+                            <span class="metric-sub">&#x2B; TOEIC Certified 2026</span>
+                        </div>
                 </div>
-            </div>
+
+                <div class="code-card">
+                    <div class="code-card-bar">
+                        <span class="dot red"></span>
+                        <span class="dot amber"></span>
+                        <span class="dot green"></span>
+                        <span class="code-filename">developer.json</span>
+                    </div>
+                    <pre class="code-body"><code>{
+  <span class="tok-k">"focus"</span>: [<span class="tok-s">"ASP.NET Core"</span>, <span class="tok-s">"EF Core"</span>, <span class="tok-s">"SQL Server"</span>],
+  <span class="tok-k">"devops"</span>: [<span class="tok-s">"Docker"</span>, <span class="tok-s">"Kubernetes"</span>, <span class="tok-s">"Grafana"</span>],
+  <span class="tok-k">"mobile"</span>: [<span class="tok-s">"Java"</span>, <span class="tok-s">"Kotlin"</span>, <span class="tok-s">"MVVM"</span>],
+  <span class="tok-k">"award"</span>: <span class="tok-s">"3rd Prize · IT Research 2026"</span>
+}</code></pre>
+                </div>
+            </aside>
         </div>
-        
-        <a href="#about" class="scroll-indicator" aria-label="Scroll Down">
-            <span class="mouse">
-                <span class="wheel"></span>
-            </span>
-            <span class="arrow-scroll"></span>
-        </a>
     </section>
 
-    <!-- About Me Section -->
-    <section id="about" class="about-section section-padding">
+    <!-- 2. ABOUT & CREDENTIALS BENTO -->
+    <section id="about" class="section">
         <div class="container">
-            <div class="section-header scroll-reveal">
-                <span class="section-tag">About Me</span>
-                <h2 class="section-title">My Journey & Ambitions</h2>
-                <div class="section-line"></div>
+            <div class="section-header reveal">
+                <span class="section-eyebrow">01 / Profile</span>
+                <h2 class="section-title">About &amp; Credentials</h2>
+                <p class="section-desc">Academic foundation, career objective, and verified achievements.</p>
             </div>
-            
-            <div class="about-grid">
-                <div class="about-image-card scroll-reveal">
-                    <div class="avatar-glow-wrapper">
-                        <div class="avatar-bg"></div>
-                        <div class="avatar-fallback">
-                            <img src="images/avatar.jpg?v=1.0.2" alt="Le Phung Ha" class="avatar-img" />
-                        </div>
-                    </div>
-                    
-                    <div class="fun-fact-box">
-                        <h4 class="fun-fact-title"><i class="fa-solid fa-wand-magic-sparkles text-glow"></i> Outside the Code</h4>
-                        <p class="fun-fact-text">
-                            When I'm not coding, I collect Mecha action figures, set up freshwater aquariums, or jump into tactical Valorant matches with my team!
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="about-info-content scroll-reveal delay-1">
-                    <h3 class="about-greeting">Architecting Optimal and Reliable Systems</h3>
-                    <p class="about-bio">
-                        I am currently pursuing a Bachelor's in Software Engineering (2023 - 2027) at Duy Tan University. Aspiring to build a career as a professional <strong>C# / Backend Developer</strong>, I actively research web architecture, efficient DevOps pipelines, and smart applications incorporating Natural Language Processing (NLP).
+
+            <div class="about-bento-grid">
+                <!-- Career Objective -->
+                <article class="bento-card span-7 spotlight-surface reveal">
+                    <div class="card-kicker"><i class="fa-solid fa-bullseye"></i> Career Objective</div>
+                    <h3 class="card-heading">Building dependable backend &amp; database systems</h3>
+                    <p class="card-copy">
+                        Aspiring C# Developer seeking a Software Developer / Internship position specializing in ASP.NET Core, database systems, and scalable backend architectures.
                     </p>
-                    
-                    <div class="education-card">
-                        <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                        <div class="edu-details">
-                            <span class="edu-year">2023 - 2027</span>
-                            <h4 class="edu-school">Duy Tan University (DTU)</h4>
-                            <p class="edu-degree">Software Engineer | GPA: 3.25 / 4.0</p>
-                            <ul class="edu-coursework">
-                                <li><i class="fa-solid fa-circle-check"></i> Data Structures & Algorithms</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Database Systems (SQL/NoSQL)</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Modern Web Development</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <p class="card-copy secondary">
+                        Through internships at <strong>Samsung R&amp;D Center Vietnam</strong> and <strong>Wisdom Brain</strong>,
+                        alongside independent full-stack AI research, I bridge clean C# backend architecture with containerized operations and practical problem-solving.
+                    </p>
+                </article>
 
-                    <div class="experience-card">
-                        <div class="exp-icon"><i class="fa-solid fa-briefcase"></i></div>
-                        <div class="exp-details">
-                            <span class="exp-year">Feb 2026 - May 2026 (3 Months)</span>
-                            <h4 class="exp-school">DevOps Engineer Intern</h4>
-                            <p class="edu-degree">Wisdom Brain</p>
-                            <ul class="edu-coursework">
-                                <li><i class="fa-solid fa-circle-check"></i> Configured containerized services with Docker & Kubernetes.</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Built and optimized automated CI/CD deployment pipelines.</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Managed server environments, Linux networking, and system logs.</li>
-                            </ul>
-                        </div>
+                <!-- Education -->
+                <article class="bento-card span-5 spotlight-surface reveal">
+                    <div class="card-kicker"><i class="fa-solid fa-graduation-cap"></i> Education</div>
+                    <div class="edu-header">
+                        <h3 class="card-heading">Duy Tan University</h3>
+                        <span class="mono-pill">2023 &#x2013; 2027</span>
                     </div>
-                    
-                    <div class="languages-box">
-                        <div class="lang-item">
-                            <span class="lang-title"><i class="fa-solid fa-earth-americas"></i> English Proficiency</span>
-                            <span class="lang-val">IELTS 6.5</span>
-                        </div>
-                        <div class="lang-item">
-                            <span class="lang-title"><i class="fa-solid fa-award"></i> TOEIC Certifications</span>
-                            <span class="lang-val">2026 Professional</span>
-                        </div>
+                    <p class="edu-major">Software Engineer</p>
+                    <div class="gpa-callout">
+                        <span class="gpa-label">Cumulative GPA</span>
+                        <span class="gpa-value">3.27 / 4.0</span>
                     </div>
-                </div>
+                </article>
+
+                <!-- Honors & Award -->
+                <article class="bento-card span-6 award-card spotlight-surface reveal">
+                    <div class="card-kicker amber"><i class="fa-solid fa-trophy"></i> Honors &amp; Awards · 2026</div>
+                    <h3 class="card-heading">Third Student Project Award &#x2013; Student Research Symposium on Information Technology</h3>
+                    <p class="card-copy">
+                        Recognized for <strong>MindConnect</strong> — an independent cross-platform social network integrating Python NLP models, Google Gemini, and smartwatch biometric PEWS tracking.
+                    </p>
+                </article>
+
+                <!-- Certifications & Beyond Code -->
+                <article class="bento-card span-6 spotlight-surface reveal">
+                    <div class="card-kicker"><i class="fa-solid fa-certificate"></i> Certifications &amp; Beyond Code</div>
+                    <div class="cert-list">
+                            <div class="cert-pill">
+                                <span class="cert-name">IELTS &#x2013; Band 6.5</span>
+                                <span class="cert-meta">2023 &middot; English Proficiency</span>
+                            </div>
+                            <div class="cert-pill">
+                                <span class="cert-name">TOEIC</span>
+                                <span class="cert-meta">2026 &middot; Business &amp; Technical English</span>
+                            </div>
+                    </div>
+                    <p class="beyond-note">
+                        <i class="fa-solid fa-sparkles"></i>
+                        Outside of engineering: collecting Mecha action figures, aquascaping freshwater tanks, and tactical Valorant matches.
+                    </p>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Research Spotlight Section -->
-    <section id="research" class="research-section section-padding waves-bg">
+    <!-- 3. EXPERIENCE SECTION -->
+    <section id="experience" class="section section-alt">
         <div class="container">
-            <div class="section-header scroll-reveal">
-                <span class="section-tag">Research Spotlight</span>
-                <h2 class="section-title">AI & Health Social Network</h2>
-                <div class="section-line"></div>
+            <div class="section-header reveal">
+                <span class="section-eyebrow">02 / Experience</span>
+                <h2 class="section-title">Industry Internships</h2>
+                <p class="section-desc">Practical software engineering and DevOps delivery in production-oriented environments.</p>
             </div>
-            
-            <div class="spotlight-card scroll-reveal">
-                <div class="spotlight-badge">
-                    <i class="fa-solid fa-trophy"></i> &#x1F949; 3rd Prize - Student Research Symposium on IT 2026
-                </div>
-                
-                <div class="spotlight-grid">
-                    <div class="spotlight-text-content">
-                        <span class="project-meta">Independent Research & Development</span>
-                        <h3 class="spotlight-title">MindConnect &#x2013; Depression Detection Social Network</h3>
-                        <p class="spotlight-description">
-                            A pioneering social network applying Vietnamese NLP models and LLMs to detect early depression signs from user behavior and content, integrated with an AI mental health companion.
-                        </p>
-                        
-                        <div class="spotlight-features">
-                            <div class="feature-item">
-                                <span class="f-icon"><i class="fa-solid fa-brain"></i></span>
-                                <div class="f-text">
-                                    <h5>Vietnamese NLP Classifier</h5>
-                                    <p>Trained localized Python text-classification models to recognize markers of depression.</p>
+
+            <div class="timeline">
+                    <article class="timeline-item reveal">
+                        <div class="timeline-marker" aria-hidden="true">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                        </div>
+                        <div class="timeline-card spotlight-surface">
+                            <div class="exp-top">
+                                <div>
+                                    <span class="exp-company">Samsung R&amp;D Center Vietnam</span>
+                                    <h3 class="exp-role">Software Engineer Intern</h3>
+                                </div>
+                                <div class="exp-badges">
+                                    <span class="mono-pill">08/2026 &#x2013; 09/2026</span>
+                                    <span class="mono-pill accent">Android &amp; DSA</span>
                                 </div>
                             </div>
-                            <div class="feature-item">
-                                <span class="f-icon"><i class="fa-solid fa-network-wired"></i></span>
-                                <div class="f-text">
-                                    <h5>Cross-Platform Backend</h5>
-                                    <p>Configured unified ASP.NET Core APIs to serve Razor web views and React Native clients simultaneously.</p>
+
+                            <ul class="exp-bullets">
+                                    <li>Solved advanced Data Structures &amp; Algorithms (DSA) problems, optimizing time and space complexity.</li>
+                                    <li>Developed a native Android app with Java/Kotlin using MVVM architecture and Retrofit for API handling.</li>
+                                    <li>Participated in daily code reviews and resolved UI/performance bottlenecks in Android Studio.</li>
+                            </ul>
+
+                            <div class="chip-row">
+                                    <span class="tech-chip">Java</span>
+                                    <span class="tech-chip">Kotlin</span>
+                                    <span class="tech-chip">Android Studio</span>
+                                    <span class="tech-chip">Retrofit</span>
+                                    <span class="tech-chip">MVVM</span>
+                                    <span class="tech-chip">DSA</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="timeline-item reveal">
+                        <div class="timeline-marker" aria-hidden="true">
+                            <i class="fa-solid fa-server"></i>
+                        </div>
+                        <div class="timeline-card spotlight-surface">
+                            <div class="exp-top">
+                                <div>
+                                    <span class="exp-company">Wisdom Brain</span>
+                                    <h3 class="exp-role">DevOps Engineer Intern</h3>
+                                </div>
+                                <div class="exp-badges">
+                                    <span class="mono-pill">02/2026 &#x2013; 06/2026</span>
+                                    <span class="mono-pill accent">Cloud &amp; Observability</span>
                                 </div>
                             </div>
-                            <div class="feature-item">
-                                <span class="f-icon"><i class="fa-solid fa-robot"></i></span>
-                                <div class="f-text">
-                                    <h5>Hybrid LLM Support</h5>
-                                    <p>Integrated GPT and Gemini engines for chatbot support, mental health advice, and real-time guidance.</p>
-                                </div>
+
+                            <ul class="exp-bullets">
+                                    <li>Containerized microservices applications using Docker to ensure consistent runtime environments across stages.</li>
+                                    <li>Deployed, managed, and monitored application workloads on a local Kubernetes cluster.</li>
+                                    <li>Configured Prometheus and Grafana dashboards to track real-time resource utilization and system performance metrics.</li>
+                            </ul>
+
+                            <div class="chip-row">
+                                    <span class="tech-chip">Docker</span>
+                                    <span class="tech-chip">Kubernetes</span>
+                                    <span class="tech-chip">Prometheus</span>
+                                    <span class="tech-chip">Grafana</span>
+                                    <span class="tech-chip">Microservices</span>
                             </div>
                         </div>
-                        
-                        <div class="tech-tags">
-                                <span class="tag">ASP.NET Core</span>
-                                <span class="tag">React Native</span>
-                                <span class="tag">Python (NLP)</span>
-                                <span class="tag">SQL Server</span>
-                                <span class="tag">OpenAI &amp; Gemini</span>
-                        </div>
-                        
-                        <div class="spotlight-links">
-                            <a href="https://depression-detection-social-network.onrender.com/" target="_blank" class="btn btn-primary btn-sm"><i class="fa-solid fa-globe"></i> Live Web Demo</a>
-                            <a href="https://github.com/ChykenHa/Depression-Detection-Social-Network" target="_blank" class="btn btn-secondary btn-sm"><i class="fa-brands fa-github"></i> Explore Source Code</a>
-                        </div>
+                    </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. RESEARCH SPOTLIGHT: MINDCONNECT -->
+    <section id="research" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-eyebrow">03 / Research Spotlight</span>
+                <h2 class="section-title">MindConnect Social Network</h2>
+                <p class="section-desc">Annual Student Research Symposium on Information Technology &middot; 09/2025 &#x2013; 05/2026</p>
+            </div>
+
+            <div class="research-shell spotlight-surface reveal">
+                <div class="research-main">
+                    <div class="research-badges">
+                        <span class="award-ribbon">
+                            <i class="fa-solid fa-award"></i> Third Student Project Award &#x2013; Student Research Symposium on Information Technology (2026)
+                        </span>
+                        <span class="mono-pill">Independent Researcher &amp; Developer</span>
                     </div>
-                    
-                    <div class="spotlight-visual">
-                        <div class="glass-device">
-                            <div class="device-header">
+
+                    <h3 class="research-title">MindConnect &#x2013; Depression Detection Social Network</h3>
+                    <p class="research-desc">Cross-platform mental health social network combining Python NLP text classification, Google Gemini AI support, and smartwatch biometric tracking (PEWS) on a unified ASP.NET Core backend.</p>
+
+                    <div class="pillars-grid">
+                            <div class="pillar-card">
+                                <div class="pillar-icon"><i class="fa-solid fa-layer-group"></i></div>
+                                <div>
+                                    <h4 class="pillar-title">Unified Cross-Platform Architecture</h4>
+                                    <p class="pillar-desc">ASP.NET Core &#x2B; EF Core &#x2B; PostgreSQL unified backend &amp; RESTful APIs powering Razor Pages web and React Native (Android &amp; iOS) apps with auth, posts, comments &amp; real-time updates.</p>
+                                </div>
+                            </div>
+                            <div class="pillar-card">
+                                <div class="pillar-icon"><i class="fa-solid fa-brain"></i></div>
+                                <div>
+                                    <h4 class="pillar-title">Python NLP &amp; Sentiment Pipeline</h4>
+                                    <p class="pillar-desc">Trained Python ML/NLP models served via FastAPI for text classification, sentiment analysis, and early depression-pattern detection from user content.</p>
+                                </div>
+                            </div>
+                            <div class="pillar-card">
+                                <div class="pillar-icon"><i class="fa-solid fa-sparkles"></i></div>
+                                <div>
+                                    <h4 class="pillar-title">Google Gemini AI Support</h4>
+                                    <p class="pillar-desc">Integrated Google Gemini services for contextual chatbot counseling and mental health guidance.</p>
+                                </div>
+                            </div>
+                            <div class="pillar-card">
+                                <div class="pillar-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                                <div>
+                                    <h4 class="pillar-title">Smartwatch Biometrics &#x2192; PEWS</h4>
+                                    <p class="pillar-desc">Tracks Hv (Heart Rate), St (Sleep Time), and Dv (Emotions) from smartwatch telemetry into PEWS risk monitoring.</p>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="chip-row">
+                            <span class="tech-chip">ASP.NET Core</span>
+                            <span class="tech-chip">Entity Framework Core</span>
+                            <span class="tech-chip">PostgreSQL</span>
+                            <span class="tech-chip">Razor Pages</span>
+                            <span class="tech-chip">Python</span>
+                            <span class="tech-chip">FastAPI</span>
+                            <span class="tech-chip">React Native</span>
+                            <span class="tech-chip">Google Gemini</span>
+                    </div>
+
+                    <div class="research-actions">
+                        <a href="https://github.com/ChykenHa/Depression-Detection-Social-Network" target="_blank" rel="noopener" class="btn btn-primary">
+                            <i class="fa-brands fa-github"></i>
+                            <span>Explore Source Code</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Interactive 3-Tab Product Preview -->
+                <div class="research-preview" aria-label="MindConnect Interactive Architecture Preview">
+                    <div class="preview-window">
+                        <div class="preview-topbar">
+                            <div class="window-dots" aria-hidden="true">
                                 <span class="dot red"></span>
-                                <span class="dot yellow"></span>
+                                <span class="dot amber"></span>
                                 <span class="dot green"></span>
-                                <span class="device-title">mindconnect.io</span>
                             </div>
-                            <div class="device-body">
-                                <div class="mockup-chart-container">
-                                    <div class="mockup-header-ui">
-                                        <span class="avatar-mini"></span>
-                                        <span class="text-line-mini"></span>
-                                    </div>
-                                    <div class="mockup-post">
-                                        <p class="mockup-post-txt">Feeling extremely overwhelmed with work lately...</p>
-                                        <span class="sentiment-indicator indicator-red animate-pulse">Depression Signal Detected</span>
-                                    </div>
-                                    <div class="mockup-ai-chat">
-                                        <div class="chat-bubble user">How can I manage stress better during finals?</div>
-                                        <div class="chat-bubble ai">
-                                            <span class="ai-spark"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Companion:</span> Try applying the Pomodoro technique and taking 5-minute walks to reset...
+                            <span class="preview-url">mindconnect.app / telemetry</span>
+                        </div>
+
+                        <div class="preview-tabs" role="tablist" aria-label="MindConnect Feature Previews">
+                            <button type="button" class="preview-tab active" role="tab" aria-selected="true" data-tab="nlp">NLP Classifier</button>
+                            <button type="button" class="preview-tab" role="tab" aria-selected="false" data-tab="pews">Smartwatch &rarr; PEWS</button>
+                            <button type="button" class="preview-tab" role="tab" aria-selected="false" data-tab="gemini">Gemini AI</button>
+                        </div>
+
+                        <div class="preview-panels">
+                            <!-- Panel 1: NLP -->
+                            <div class="preview-panel active" data-panel="nlp" role="tabpanel">
+                                <div class="mock-post">
+                                    <div class="mock-user">
+                                        <span class="mock-avatar">U</span>
+                                        <div>
+                                            <strong>User Post #1042</strong>
+                                            <span>Web &amp; React Native Sync</span>
                                         </div>
+                                        <span class="signal-badge danger">Signal Detected</span>
+                                    </div>
+                                    <p class="mock-text">
+                                        "Lately I feel exhausted every morning and disconnected from my classes..."
+                                    </p>
+                                </div>
+                                <div class="mock-telemetry-row">
+                                    <div class="mini-stat">
+                                        <span>Endpoint</span>
+                                        <code>POST /api/nlp/classify</code>
+                                    </div>
+                                    <div class="mini-stat">
+                                        <span>Sentiment</span>
+                                        <strong class="text-rose">High Risk (0.87)</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Panel 2: Smartwatch PEWS -->
+                            <div class="preview-panel" data-panel="pews" role="tabpanel" hidden>
+                                <div class="biometrics-grid">
+                                    <div class="bio-tile">
+                                        <span class="bio-code">Hv</span>
+                                        <span class="bio-name">Heart Rate</span>
+                                        <strong class="bio-val">104 <small>bpm</small></strong>
+                                    </div>
+                                    <div class="bio-tile">
+                                        <span class="bio-code">St</span>
+                                        <span class="bio-name">Sleep Time</span>
+                                        <strong class="bio-val">4.5 <small>hrs</small></strong>
+                                    </div>
+                                    <div class="bio-tile">
+                                        <span class="bio-code">Dv</span>
+                                        <span class="bio-name">Emotion State</span>
+                                        <strong class="bio-val text-amber">Stressed</strong>
+                                    </div>
+                                    <div class="bio-tile highlight">
+                                        <span class="bio-code">PEWS</span>
+                                        <span class="bio-name">Alert Tier</span>
+                                        <strong class="bio-val text-accent">Monitored</strong>
+                                    </div>
+                                </div>
+                                <p class="mock-caption">Smartwatch telemetry (Hv, St, Dv) synced to PEWS monitoring pipeline.</p>
+                            </div>
+
+                            <!-- Panel 3: Gemini AI -->
+                            <div class="preview-panel" data-panel="gemini" role="tabpanel" hidden>
+                                <div class="mock-chat">
+                                    <div class="chat-msg user">
+                                        I have been struggling to sleep before project deadlines.
+                                    </div>
+                                    <div class="chat-msg bot">
+                                        <span class="bot-tag"><i class="fa-solid fa-sparkles"></i> Google Gemini Support</span>
+                                        <p>Let's break tonight into a 25-minute wind-down routine and prioritize one small task for tomorrow morning.</p>
                                     </div>
                                 </div>
                             </div>
@@ -300,356 +525,440 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects-section section-padding">
+    <!-- 5. PROJECTS SECTION -->
+    <section id="projects" class="section section-alt">
         <div class="container">
-            <div class="section-header scroll-reveal">
-                <span class="section-tag">My Creations</span>
-                <h2 class="section-title">Selected Projects</h2>
-                <div class="section-line"></div>
-            </div>
-            
-            <!-- Project Filter Control -->
-            <div class="project-filters scroll-reveal">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="web">Web & Backend</button>
-                <button class="filter-btn" data-filter="mobile">Mobile App</button>
-                <button class="filter-btn" data-filter="other">Desktop & Desktop</button>
-            </div>
-            
-            <!-- Projects Grid -->
-            <div class="projects-grid">
-                    <div class="project-card scroll-reveal" data-category="web">
-                        <div class="project-card-visual bg-gradient-1">
-                            <i class="fa-solid fa-users-gear project-icon"></i>
-                        </div>
-                        <div class="project-card-body">
-                            <div class="project-role">
-                                    <i class="fa-solid fa-crown text-glow"></i>
-                                Team Leader &amp; Lead Backend
-                            </div>
-                            <h3 class="project-name">Student Progress Management System</h3>
-                            <p class="project-desc">A comprehensive academic tracking system featuring layered architecture, role-based authorization (Admin, Lecturer, Student), and dashboard metrics.</p>
-                            <div class="project-tech">
-                                    <span>ASP.NET Core</span>
-                                    <span>EF Core</span>
-                                    <span>SQL Server</span>
-                                    <span>Razor Pages</span>
-                            </div>
-                            <div class="project-footer">
-                                <a href="https://github.com/ChykenHa/QuanLyTienDoSinhVien" target="_blank" class="project-link"><i class="fa-brands fa-github"></i> Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card scroll-reveal" data-category="web">
-                        <div class="project-card-visual bg-gradient-2">
-                            <i class="fa-solid fa-cart-shopping project-icon"></i>
-                        </div>
-                        <div class="project-card-body">
-                            <div class="project-role">
-                                    <i class="fa-solid fa-user-gear"></i>
-                                Fullstack Developer
-                            </div>
-                            <h3 class="project-name">E-commerce Website</h3>
-                            <p class="project-desc">Full-featured online shopping platform containing product catalogs, shopping cart logic, order processing, and administrative dashboards.</p>
-                            <div class="project-tech">
-                                    <span>ASP.NET Core</span>
-                                    <span>SQL Server</span>
-                                    <span>Bootstrap</span>
-                                    <span>JavaScript</span>
-                            </div>
-                            <div class="project-footer">
-                                <a href="https://github.com/ChykenHa/Ecommerce" target="_blank" class="project-link"><i class="fa-brands fa-github"></i> Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card scroll-reveal" data-category="mobile">
-                        <div class="project-card-visual bg-gradient-3">
-                            <i class="fa-solid fa-mobile-screen-button project-icon"></i>
-                        </div>
-                        <div class="project-card-body">
-                            <div class="project-role">
-                                    <i class="fa-solid fa-user-gear"></i>
-                                Mobile Developer
-                            </div>
-                            <h3 class="project-name">Movie Android Application</h3>
-                            <p class="project-desc">Sleek movie discovery application leveraging TMDB API, structured under clean MVVM architecture, built with Java/Kotlin in Android Studio.</p>
-                            <div class="project-tech">
-                                    <span>Java / Kotlin</span>
-                                    <span>Android Studio</span>
-                                    <span>Retrofit</span>
-                                    <span>MVVM</span>
-                            </div>
-                            <div class="project-footer">
-                                <a href="https://github.com/ChykenHa/MyAndroidAPP" target="_blank" class="project-link"><i class="fa-brands fa-github"></i> Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card scroll-reveal" data-category="other">
-                        <div class="project-card-visual bg-gradient-4">
-                            <i class="fa-solid fa-hotel project-icon"></i>
-                        </div>
-                        <div class="project-card-body">
-                            <div class="project-role">
-                                    <i class="fa-solid fa-user-gear"></i>
-                                Windows Developer
-                            </div>
-                            <h3 class="project-name">Hotel Management System</h3>
-                            <p class="project-desc">A C# WinForms desktop software for hotel logistics, booking scheduling, invoice generation, and human resource tracking.</p>
-                            <div class="project-tech">
-                                    <span>C#</span>
-                                    <span>.NET WinForms</span>
-                                    <span>SQL Server</span>
-                            </div>
-                            <div class="project-footer">
-                                <a href="https://github.com/ChykenHa/Hotel_Management" target="_blank" class="project-link"><i class="fa-brands fa-github"></i> Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card scroll-reveal" data-category="other">
-                        <div class="project-card-visual bg-gradient-5">
-                            <i class="fa-solid fa-charging-station project-icon"></i>
-                        </div>
-                        <div class="project-card-body">
-                            <div class="project-role">
-                                    <i class="fa-solid fa-user-gear"></i>
-                                Frontend Developer
-                            </div>
-                            <h3 class="project-name">Charging Station Management UI</h3>
-                            <p class="project-desc">Dynamic dashboard for smart electric vehicle charging stations, visualizing real-time operations, power statistics, and status alerts.</p>
-                            <div class="project-tech">
-                                    <span>HTML5</span>
-                                    <span>CSS3</span>
-                                    <span>JavaScript</span>
-                            </div>
-                            <div class="project-footer">
-                                <a href="https://github.com/ChykenHa/charging-station" target="_blank" class="project-link"><i class="fa-brands fa-github"></i> Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card scroll-reveal" data-category="web">
-                        <div class="project-card-visual bg-gradient-6">
-                            <i class="fa-solid fa-flask project-icon"></i>
-                        </div>
-                        <div class="project-card-body">
-                            <div class="project-role">
-                                    <i class="fa-solid fa-user-gear"></i>
-                                Academic Research
-                            </div>
-                            <h3 class="project-name">Academic &amp; CDIO3 Projects</h3>
-                            <p class="project-desc">Academic research repositories and CDIO projects focused on database optimizations, process mapping, and workflow automation.</p>
-                            <div class="project-tech">
-                                    <span>ASP.NET Core</span>
-                                    <span>SQL Server</span>
-                                    <span>EF Core</span>
-                            </div>
-                            <div class="project-footer">
-                                <a href="https://github.com/ChykenHa/NCKH_SV" target="_blank" class="project-link"><i class="fa-brands fa-github"></i> Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                                    <a href="https://github.com/ChykenHa/CDIO3" target="_blank" class="project-link" style="margin-left: 15px;"><i class="fa-brands fa-github"></i> Sub-Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </div>
-    </section>
+            <div class="section-header-row reveal">
+                <div class="section-header compact">
+                    <span class="section-eyebrow">04 / Selected Work</span>
+                    <h2 class="section-title">Engineering Projects</h2>
+                    <p class="section-desc">Full-stack ASP.NET Core applications, mobile apps, and desktop software.</p>
+                </div>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills-section section-padding waves-bg-inverted">
-        <div class="container">
-            <div class="section-header scroll-reveal">
-                <span class="section-tag">Technical Competencies</span>
-                <h2 class="section-title">My Toolbox</h2>
-                <div class="section-line"></div>
+                <div class="filter-bar" role="group" aria-label="Filter projects by category">
+                    <button type="button" class="filter-pill active" data-filter="all">All <span class="filter-count" id="project-count">5</span></button>
+                    <button type="button" class="filter-pill" data-filter="web">Backend &amp; Web</button>
+                    <button type="button" class="filter-pill" data-filter="mobile">Mobile</button>
+                    <button type="button" class="filter-pill" data-filter="desktop">Desktop &amp; UI</button>
+                </div>
             </div>
-            
-            <div class="skills-grid">
-                <!-- Column 1: Languages -->
-                <div class="skill-category-card scroll-reveal">
-                    <h3 class="category-title"><i class="fa-solid fa-code"></i> Languages</h3>
-                    <div class="skill-list">
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">C# (.NET)</span>
-                                <span class="skill-percentage">Core Stack</span>
+
+            <!-- Featured CV Projects -->
+            <div class="projects-group" data-group="featured">
+                <h3 class="group-label">Featured CV Projects</h3>
+                <div class="projects-grid featured-grid">
+                        <article class="project-card featured spotlight-surface reveal" data-category="web" data-project-id="student-progress">
+                            <div class="project-card-top">
+                                <div class="project-icon-box">
+                                    <i class="fa-solid fa-users-gear"></i>
+                                </div>
+                                <span class="mono-pill">11/2025 &#x2013; 02/2026</span>
                             </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="85%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Java & Kotlin</span>
-                                <span class="skill-percentage">Proficient</span>
+
+                            <span class="project-role-tag">Technical Team Leader &amp; Backend Developer</span>
+                            <h4 class="project-title">Student Progress Management System</h4>
+                            <p class="project-summary">Team-led academic management platform with layered architecture, role-based access control (Admin, Lecturer, Student), and progress analytics dashboards.</p>
+
+                            <ul class="project-mini-list">
+                                    <li>Led a team to develop a student academic management system.</li>
+                                    <li>Designed system architecture and assigned tasks to team members.</li>
+                                    <li>Developed core backend features using ASP.NET Core.</li>
+                            </ul>
+
+                            <div class="chip-row">
+                                    <span class="tech-chip">ASP.NET Core</span>
+                                    <span class="tech-chip">Entity Framework Core</span>
+                                    <span class="tech-chip">SQL Server</span>
+                                    <span class="tech-chip">Razor Pages</span>
                             </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="75%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">SQL</span>
-                                <span class="skill-percentage">Proficient</span>
+
+                            <div class="project-actions">
+                                <a href="https://github.com/ChykenHa/QuanLyTienDoSinhVien" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                                    <i class="fa-brands fa-github"></i> GitHub
+                                </a>
+                                <button type="button" class="btn btn-ghost btn-sm view-details-btn" data-project-id="student-progress">
+                                    <span>View Details</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
                             </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="80%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Python & JavaScript</span>
-                                <span class="skill-percentage">Core & AI</span>
+                        </article>
+                        <article class="project-card featured spotlight-surface reveal" data-category="web" data-project-id="ecommerce-website">
+                            <div class="project-card-top">
+                                <div class="project-icon-box">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </div>
+                                <span class="mono-pill">08/2025 &#x2013; 10/2025</span>
                             </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="70%"></div></div>
-                        </div>
-                    </div>
+
+                            <span class="project-role-tag">Fullstack Developer</span>
+                            <h4 class="project-title">E-commerce Website</h4>
+                            <p class="project-summary">Full-stack online storefront implementing end-to-end product catalog management, shopping cart workflows, order processing, and admin controls.</p>
+
+                            <ul class="project-mini-list">
+                                    <li>Built an online shopping website with core e-commerce functionalities.</li>
+                                    <li>Developed product management, shopping cart, and order processing workflows.</li>
+                                    <li>Integrated user authentication and admin management system.</li>
+                            </ul>
+
+                            <div class="chip-row">
+                                    <span class="tech-chip">ASP.NET</span>
+                                    <span class="tech-chip">SQL Server</span>
+                                    <span class="tech-chip">Entity Framework</span>
+                                    <span class="tech-chip">Bootstrap</span>
+                                    <span class="tech-chip">JavaScript</span>
+                            </div>
+
+                            <div class="project-actions">
+                                <a href="https://github.com/ChykenHa/Ecommerce" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                                    <i class="fa-brands fa-github"></i> GitHub
+                                </a>
+                                <button type="button" class="btn btn-ghost btn-sm view-details-btn" data-project-id="ecommerce-website">
+                                    <span>View Details</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
+                            </div>
+                        </article>
                 </div>
-                
-                <!-- Column 2: Frameworks & Web -->
-                <div class="skill-category-card scroll-reveal delay-1">
-                    <h3 class="category-title"><i class="fa-solid fa-cubes"></i> Frameworks</h3>
-                    <div class="skill-list">
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">ASP.NET Core (Web/API)</span>
-                                <span class="skill-percentage">Core Stack</span>
+            </div>
+
+            <!-- Additional GitHub Projects -->
+            <div class="projects-group" data-group="additional">
+                <h3 class="group-label">Additional GitHub Showcase</h3>
+                <div class="projects-grid compact-grid">
+                        <article class="project-card spotlight-surface reveal" data-category="mobile" data-project-id="movie-android">
+                            <div class="project-card-top">
+                                <div class="project-icon-box">
+                                    <i class="fa-solid fa-film"></i>
+                                </div>
+                                <span class="mono-pill">GitHub Showcase</span>
                             </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="85%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Entity Framework Core</span>
-                                <span class="skill-percentage">Proficient</span>
+
+                            <span class="project-role-tag">Mobile Developer</span>
+                            <h4 class="project-title">Movie Android Application</h4>
+                            <p class="project-summary">Native Android movie discovery app built in Android Studio using MVVM architecture, Retrofit networking, and clean reactive state handling.</p>
+
+                            <div class="chip-row">
+                                    <span class="tech-chip">Java</span>
+                                    <span class="tech-chip">Kotlin</span>
+                                    <span class="tech-chip">Android Studio</span>
+                                    <span class="tech-chip">Retrofit</span>
+                                    <span class="tech-chip">MVVM</span>
                             </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="80%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">React Native (Mobile)</span>
-                                <span class="skill-percentage">Familiar</span>
+
+                            <div class="project-actions">
+                                <a href="https://github.com/ChykenHa/MyAndroidAPP" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                                    <i class="fa-brands fa-github"></i> GitHub
+                                </a>
+                                <button type="button" class="btn btn-ghost btn-sm view-details-btn" data-project-id="movie-android">
+                                    <span>Details</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
                             </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="60%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Razor Pages / HTML & CSS</span>
-                                <span class="skill-percentage">Proficient</span>
+                        </article>
+                        <article class="project-card spotlight-surface reveal" data-category="desktop" data-project-id="hotel-management">
+                            <div class="project-card-top">
+                                <div class="project-icon-box">
+                                    <i class="fa-solid fa-hotel"></i>
+                                </div>
+                                <span class="mono-pill">GitHub Showcase</span>
                             </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="75%"></div></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Column 3: DB & DevOps -->
-                <div class="skill-category-card scroll-reveal delay-2">
-                    <h3 class="category-title"><i class="fa-solid fa-gears"></i> Systems & DevOps</h3>
-                    <div class="skill-list">
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">SQL Server</span>
-                                <span class="skill-percentage">Core Stack</span>
+
+                            <span class="project-role-tag">Windows Developer</span>
+                            <h4 class="project-title">Hotel Management System</h4>
+                            <p class="project-summary">C# WinForms desktop application for hotel operations, room booking schedules, billing/invoices, and staff management backed by SQL Server.</p>
+
+                            <div class="chip-row">
+                                    <span class="tech-chip">C#</span>
+                                    <span class="tech-chip">.NET WinForms</span>
+                                    <span class="tech-chip">SQL Server</span>
                             </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="85%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">MongoDB & PostgreSQL</span>
-                                <span class="skill-percentage">Familiar</span>
+
+                            <div class="project-actions">
+                                <a href="https://github.com/ChykenHa/Hotel_Management" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                                    <i class="fa-brands fa-github"></i> GitHub
+                                </a>
+                                <button type="button" class="btn btn-ghost btn-sm view-details-btn" data-project-id="hotel-management">
+                                    <span>Details</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
                             </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="65%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Docker & Kubernetes</span>
-                                <span class="skill-percentage">Learning</span>
+                        </article>
+                        <article class="project-card spotlight-surface reveal" data-category="desktop" data-project-id="charging-station">
+                            <div class="project-card-top">
+                                <div class="project-icon-box">
+                                    <i class="fa-solid fa-charging-station"></i>
+                                </div>
+                                <span class="mono-pill">GitHub Showcase</span>
                             </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="60%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Git & CI-CD Pipelines</span>
-                                <span class="skill-percentage">Proficient</span>
+
+                            <span class="project-role-tag">Frontend Developer</span>
+                            <h4 class="project-title">Charging Station Management UI</h4>
+                            <p class="project-summary">Interactive monitoring dashboard UI for smart EV charging stations featuring real-time status cards, power usage views, and alert indicators.</p>
+
+                            <div class="chip-row">
+                                    <span class="tech-chip">HTML5</span>
+                                    <span class="tech-chip">CSS3</span>
+                                    <span class="tech-chip">JavaScript</span>
                             </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="80%"></div></div>
-                        </div>
-                    </div>
+
+                            <div class="project-actions">
+                                <a href="https://github.com/ChykenHa/charging-station" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                                    <i class="fa-brands fa-github"></i> GitHub
+                                </a>
+                                <button type="button" class="btn btn-ghost btn-sm view-details-btn" data-project-id="charging-station">
+                                    <span>Details</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
+                            </div>
+                        </article>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section section-padding">
+    <!-- 6. TECHNICAL & SOFT SKILLS -->
+    <section id="skills" class="section">
         <div class="container">
-            <div class="section-header scroll-reveal">
-                <span class="section-tag">Contact</span>
-                <h2 class="section-title">Let's Build Something Together</h2>
-                <div class="section-line"></div>
+            <div class="section-header reveal">
+                <span class="section-eyebrow">05 / Capabilities</span>
+                <h2 class="section-title">Technical &amp; Soft Skills</h2>
+                <p class="section-desc">Core stack highlighted with <span class="inline-dot" aria-hidden="true"></span> indicators across backend, databases, and DevOps.</p>
             </div>
-            
+
+            <div class="skills-bento-grid">
+                    <article class="skill-card spotlight-surface reveal">
+                        <div class="skill-card-head">
+                            <span class="skill-icon"><i class="fa-solid fa-code"></i></span>
+                            <h3 class="skill-group-title">Programming Languages</h3>
+                        </div>
+                        <div class="skill-badges-wrap">
+                                <span class="skill-badge core">
+                                        <span class="core-dot" aria-hidden="true"></span>
+                                    C#
+                                </span>
+                                <span class="skill-badge core">
+                                        <span class="core-dot" aria-hidden="true"></span>
+                                    Java
+                                </span>
+                                <span class="skill-badge core">
+                                        <span class="core-dot" aria-hidden="true"></span>
+                                    SQL
+                                </span>
+                                <span class="skill-badge ">
+                                    Kotlin
+                                </span>
+                                <span class="skill-badge ">
+                                    Python
+                                </span>
+                                <span class="skill-badge ">
+                                    JavaScript
+                                </span>
+                        </div>
+                    </article>
+                    <article class="skill-card spotlight-surface reveal">
+                        <div class="skill-card-head">
+                            <span class="skill-icon"><i class="fa-solid fa-layer-group"></i></span>
+                            <h3 class="skill-group-title">Frameworks &amp; Platforms</h3>
+                        </div>
+                        <div class="skill-badges-wrap">
+                                <span class="skill-badge core">
+                                        <span class="core-dot" aria-hidden="true"></span>
+                                    ASP.NET Core
+                                </span>
+                                <span class="skill-badge core">
+                                        <span class="core-dot" aria-hidden="true"></span>
+                                    Entity Framework Core
+                                </span>
+                                <span class="skill-badge ">
+                                    Razor Pages
+                                </span>
+                                <span class="skill-badge ">
+                                    FastAPI
+                                </span>
+                                <span class="skill-badge ">
+                                    React Native
+                                </span>
+                                <span class="skill-badge ">
+                                    Bootstrap
+                                </span>
+                        </div>
+                    </article>
+                    <article class="skill-card spotlight-surface reveal">
+                        <div class="skill-card-head">
+                            <span class="skill-icon"><i class="fa-solid fa-database"></i></span>
+                            <h3 class="skill-group-title">Databases</h3>
+                        </div>
+                        <div class="skill-badges-wrap">
+                                <span class="skill-badge core">
+                                        <span class="core-dot" aria-hidden="true"></span>
+                                    SQL Server
+                                </span>
+                                <span class="skill-badge core">
+                                        <span class="core-dot" aria-hidden="true"></span>
+                                    MongoDB
+                                </span>
+                                <span class="skill-badge ">
+                                    PostgreSQL
+                                </span>
+                        </div>
+                    </article>
+                    <article class="skill-card spotlight-surface reveal">
+                        <div class="skill-card-head">
+                            <span class="skill-icon"><i class="fa-solid fa-sliders"></i></span>
+                            <h3 class="skill-group-title">DevOps, Mobile &amp; Tools</h3>
+                        </div>
+                        <div class="skill-badges-wrap">
+                                <span class="skill-badge core">
+                                        <span class="core-dot" aria-hidden="true"></span>
+                                    Git
+                                </span>
+                                <span class="skill-badge core">
+                                        <span class="core-dot" aria-hidden="true"></span>
+                                    Docker
+                                </span>
+                                <span class="skill-badge core">
+                                        <span class="core-dot" aria-hidden="true"></span>
+                                    Visual Studio
+                                </span>
+                                <span class="skill-badge ">
+                                    Kubernetes
+                                </span>
+                                <span class="skill-badge ">
+                                    Prometheus
+                                </span>
+                                <span class="skill-badge ">
+                                    Grafana
+                                </span>
+                                <span class="skill-badge ">
+                                    Android Studio
+                                </span>
+                                <span class="skill-badge ">
+                                    Retrofit
+                                </span>
+                                <span class="skill-badge ">
+                                    MVVM
+                                </span>
+                        </div>
+                    </article>
+            </div>
+
+            <div class="soft-skills-strip reveal">
+                    <div class="soft-skill-card spotlight-surface">
+                        <div class="soft-head">
+                            <i class="fa-solid fa-people-group"></i>
+                            <h4>Teamwork</h4>
+                        </div>
+                        <p>Technical team leadership, task delegation, and daily code reviews across university &amp; Samsung R&amp;D projects.</p>
+                    </div>
+                    <div class="soft-skill-card spotlight-surface">
+                        <div class="soft-head">
+                            <i class="fa-solid fa-lightbulb"></i>
+                            <h4>Problem-solving</h4>
+                        </div>
+                        <p>Algorithmic optimization (DSA), UI/performance bottleneck resolution, and end-to-end system debugging.</p>
+                    </div>
+                    <div class="soft-skill-card spotlight-surface">
+                        <div class="soft-head">
+                            <i class="fa-solid fa-clock"></i>
+                            <h4>Time management</h4>
+                        </div>
+                        <p>Delivering two industry internships, an award-winning research project, and a 3.27 GPA in parallel.</p>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. CONTACT SECTION -->
+    <section id="contact" class="section section-alt">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-eyebrow">06 / Contact</span>
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-desc">Available for C# / ASP.NET Core Software Developer roles and engineering collaborations.</p>
+            </div>
+
             <div class="contact-grid">
-                <!-- Info details -->
-                <div class="contact-info scroll-reveal">
-                    <h3 class="info-title">Let's discuss your next project!</h3>
-                    <p class="info-text">
-                        I am currently open to internship positions, backend developer roles, or project collaborations. Reach out and I will reply within 24 hours.
-                    </p>
-                    
-                    <div class="info-list">
-                        <div class="info-link-card">
-                            <span class="info-icon"><i class="fa-solid fa-phone"></i></span>
-                            <div class="info-card-text">
-                                <span>Phone Number</span>
-                                <a href="tel:0347372061">034 737 2061</a>
-                            </div>
+                <div class="contact-cards reveal">
+                    <div class="contact-card spotlight-surface">
+                        <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="contact-info">
+                            <span class="contact-label">Email</span>
+                            <a href="mailto:lephungha1203@gmail.com" class="contact-val">lephungha1203@gmail.com</a>
                         </div>
-                        
-                        <div class="info-link-card">
-                            <span class="info-icon"><i class="fa-solid fa-envelope"></i></span>
-                            <div class="info-card-text">
-                                <span>Email Address</span>
-                                <a href="mailto:lephungha1203@gmail.com">lephungha1203@gmail.com</a>
-                            </div>
+                        <button type="button" class="icon-btn" data-copy="lephungha1203@gmail.com" data-copy-label="Email address" aria-label="Copy email address">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <div class="contact-card spotlight-surface">
+                        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div class="contact-info">
+                            <span class="contact-label">Phone</span>
+                            <a href="tel:0347372061" class="contact-val">034 737 2061</a>
                         </div>
-                        
-                        <div class="info-link-card">
-                            <span class="info-icon"><i class="fa-solid fa-location-dot"></i></span>
-                            <div class="info-card-text">
-                                <span>Location</span>
-                                <p>Hoa Khanh Nam, Da Nang, Vietnam</p>
-                            </div>
+                        <button type="button" class="icon-btn" data-copy="034 737 2061" data-copy-label="Phone number" aria-label="Copy phone number">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <div class="contact-card spotlight-surface">
+                        <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="contact-info">
+                            <span class="contact-label">Location</span>
+                            <p class="contact-val">Hoa Khanh Nam, Da Nang, Vietnam</p>
                         </div>
                     </div>
-                    
-                    <div class="social-links-box">
-                        <a href="https://github.com/ChykenHa" target="_blank" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/h%C3%A0-l%C3%AA-ph%C3%B9ng-24110137b/" target="_blank" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="mailto:lephungha1203@gmail.com" class="social-icon" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+
+                    <div class="contact-links-bar">
+                        <a href="https://github.com/ChykenHa" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                            <i class="fa-brands fa-github"></i> GitHub
+                        </a>
+                        <a href="https://www.linkedin.com/in/h%C3%A0-l%C3%AA-ph%C3%B9ng-24110137b/" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                            <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+                        </a>
+                        <a href="Le-Phung-Ha-CV.pdf" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                            <i class="fa-solid fa-file-pdf"></i> Resume PDF
+                        </a>
                     </div>
                 </div>
-                
-                <!-- Contact Form -->
-                <div class="contact-form-container scroll-reveal delay-1">
-                    <form id="portfolio-contact-form" class="glass-form">
+
+                <!-- Real Mailto & Copy Composer -->
+                <div class="composer-card spotlight-surface reveal">
+                    <h3 class="composer-title">Quick Message Composer</h3>
+                    <p class="composer-sub">Opens directly in your default email app or copies a formatted message to your clipboard.</p>
+
+                    <form id="contact-composer" data-recipient="lephungha1203@gmail.com">
                         <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Your Name</label>
-                                <input type="text" id="name" name="name" required placeholder="John Doe">
+                            <div class="form-field">
+                                <label for="c-name">Your Name</label>
+                                <input type="text" id="c-name" name="name" required placeholder="Nguyen Van A" />
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email" name="email" required placeholder="john@example.com">
+                            <div class="form-field">
+                                <label for="c-email">Your Email</label>
+                                <input type="email" id="c-email" name="email" required placeholder="recruiter@company.com" />
                             </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required placeholder="Project Opportunity / Questions">
+
+                        <div class="form-field">
+                            <label for="c-subject">Subject</label>
+                            <input type="text" id="c-subject" name="subject" required placeholder="Software Developer Opportunity" />
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
+
+                        <div class="form-field">
+                            <label for="c-message">Message</label>
+                            <textarea id="c-message" name="message" rows="4" required placeholder="Hi Ha, we would love to discuss..."></textarea>
                         </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-submit btn-glow">
-                            <span>Send Message <i class="fa-solid fa-paper-plane"></i></span>
-                        </button>
-                        
-                        <div class="form-feedback-message"></div>
+
+                        <div class="composer-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>Open in Email App</span>
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="copy-composed-btn">
+                                <i class="fa-regular fa-copy"></i>
+                                <span>Copy Message</span>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -657,22 +966,81 @@
     </section>
 </main>
 
+<!-- Embedded Strongly-Typed Project Data for Modal -->
+<script type="application/json" id="projects-data">[{"id":"student-progress","name":"Student Progress Management System","period":"11/2025 \u2013 02/2026","role":"Technical Team Leader \u0026 Backend Developer","category":"web","isFeatured":true,"iconClass":"fa-solid fa-users-gear","githubUrl":"https://github.com/ChykenHa/QuanLyTienDoSinhVien","summary":"Team-led academic management platform with layered architecture, role-based access control (Admin, Lecturer, Student), and progress analytics dashboards.","techTags":["ASP.NET Core","Entity Framework Core","SQL Server","Razor Pages"],"highlights":["Led a team to develop a student academic management system.","Designed system architecture and assigned tasks to team members.","Developed core backend features using ASP.NET Core.","Implemented role-based authentication (Admin, Lecturer, Student).","Built dashboards and academic tracking functionalities.","Designed and managed database using SQL Server and Entity Framework Core while reviewing code quality."]},{"id":"ecommerce-website","name":"E-commerce Website","period":"08/2025 \u2013 10/2025","role":"Fullstack Developer","category":"web","isFeatured":true,"iconClass":"fa-solid fa-cart-shopping","githubUrl":"https://github.com/ChykenHa/Ecommerce","summary":"Full-stack online storefront implementing end-to-end product catalog management, shopping cart workflows, order processing, and admin controls.","techTags":["ASP.NET","SQL Server","Entity Framework","Bootstrap","JavaScript"],"highlights":["Built an online shopping website with core e-commerce functionalities.","Developed product management, shopping cart, and order processing workflows.","Integrated user authentication and admin management system.","Designed responsive UI using Bootstrap and JavaScript.","Managed database operations with SQL Server and Entity Framework ORM."]},{"id":"movie-android","name":"Movie Android Application","period":"GitHub Showcase","role":"Mobile Developer","category":"mobile","isFeatured":false,"iconClass":"fa-solid fa-film","githubUrl":"https://github.com/ChykenHa/MyAndroidAPP","summary":"Native Android movie discovery app built in Android Studio using MVVM architecture, Retrofit networking, and clean reactive state handling.","techTags":["Java","Kotlin","Android Studio","Retrofit","MVVM"],"highlights":["Implemented movie listing, search, and detailed information display.","Structured codebase with clean MVVM architecture and LiveData/ViewModel.","Integrated REST APIs via Retrofit for fetching movie data."]},{"id":"hotel-management","name":"Hotel Management System","period":"GitHub Showcase","role":"Windows Developer","category":"desktop","isFeatured":false,"iconClass":"fa-solid fa-hotel","githubUrl":"https://github.com/ChykenHa/Hotel_Management","summary":"C# WinForms desktop application for hotel operations, room booking schedules, billing/invoices, and staff management backed by SQL Server.","techTags":["C#",".NET WinForms","SQL Server"],"highlights":["Built room availability and booking scheduling workflows.","Automated invoice generation and customer billing tracking.","Persisted operational and staff records in SQL Server."]},{"id":"charging-station","name":"Charging Station Management UI","period":"GitHub Showcase","role":"Frontend Developer","category":"desktop","isFeatured":false,"iconClass":"fa-solid fa-charging-station","githubUrl":"https://github.com/ChykenHa/charging-station","summary":"Interactive monitoring dashboard UI for smart EV charging stations featuring real-time status cards, power usage views, and alert indicators.","techTags":["HTML5","CSS3","JavaScript"],"highlights":["Designed responsive dashboard layout for EV station monitoring.","Visualized station availability, power output statistics, and status alerts."]}]</script>
+
 
     <!-- Footer -->
-    <footer b-jrjsiumu31 class="footer-area">
-        <div b-jrjsiumu31 class="container footer-container">
-            <p b-jrjsiumu31 class="copyright">&copy; 2026 Le Phung Ha. Crafted with <span b-jrjsiumu31 class="text-glow">Dark Ocean</span> & <i b-jrjsiumu31 class="fa-solid fa-heart animate-pulse text-coral"></i></p>
+    <footer b-jrjsiumu31 class="site-footer">
+        <div b-jrjsiumu31 class="container footer-inner">
+            <div b-jrjsiumu31 class="footer-brand">
+                <span b-jrjsiumu31 class="brand-monogram sm">LH</span>
+                <div b-jrjsiumu31>
+                    <p b-jrjsiumu31 class="footer-copy">&copy; 2026 Le Phung Ha. Engineered with ASP.NET Core.</p>
+                    <p b-jrjsiumu31 class="footer-sub">Hoa Khanh Nam, Da Nang, Vietnam</p>
+                </div>
+            </div>
             <div b-jrjsiumu31 class="footer-links">
-                <a b-jrjsiumu31 href="#hero">Back to top</a>
-                <a href="Le-Phung-Ha-TopCV.vn-250526.75757.pdf" target="_blank">View CV PDF</a>
-                <a b-jrjsiumu31 href="https://github.com/ChykenHa" target="_blank">GitHub</a>
+                <a b-jrjsiumu31 href="#hero">Top</a>
+                <a href="Le-Phung-Ha-CV.pdf" target="_blank" rel="noopener">CV PDF</a>
+                <a b-jrjsiumu31 href="https://github.com/ChykenHa" target="_blank" rel="noopener">GitHub</a>
+                <a b-jrjsiumu31 href="https://www.linkedin.com/in/h%C3%A0-l%C3%AA-ph%C3%B9ng-24110137b/" target="_blank" rel="noopener">LinkedIn</a>
+                <a b-jrjsiumu31 href="mailto:lephungha1203@gmail.com">Email</a>
             </div>
         </div>
     </footer>
 
-    <!-- Custom Portfolio JS -->
-    <script src="js/portfolio.js?v=1.0.2"></script>
+    <!-- Command Palette Modal -->
+    <div b-jrjsiumu31 class="modal-backdrop" id="cmd-palette" role="dialog" aria-modal="true" aria-labelledby="cmd-title" hidden>
+        <div b-jrjsiumu31 class="modal-dialog cmd-dialog">
+            <div b-jrjsiumu31 class="cmd-input-wrap">
+                <i b-jrjsiumu31 class="fa-solid fa-terminal" aria-hidden="true"></i>
+                <input b-jrjsiumu31 type="text" id="cmd-input" placeholder="Type a command or section (e.g. Experience, Copy Email, Theme)..." aria-label="Search commands" autocomplete="off" />
+                <kbd b-jrjsiumu31>Esc</kbd>
+            </div>
+            <h2 b-jrjsiumu31 id="cmd-title" class="sr-only">Quick Command Palette</h2>
+            <ul b-jrjsiumu31 class="cmd-list" id="cmd-list" role="listbox"></ul>
+        </div>
+    </div>
 
+    <!-- Project Details Modal -->
+    <div b-jrjsiumu31 class="modal-backdrop" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="pm-title" hidden>
+        <div b-jrjsiumu31 class="modal-dialog project-dialog">
+            <div b-jrjsiumu31 class="pm-header">
+                <div b-jrjsiumu31>
+                    <span b-jrjsiumu31 class="pm-period mono-pill" id="pm-period"></span>
+                    <h2 b-jrjsiumu31 class="pm-title" id="pm-title"></h2>
+                    <p b-jrjsiumu31 class="pm-role" id="pm-role"></p>
+                </div>
+                <button b-jrjsiumu31 type="button" class="icon-btn" id="pm-close" aria-label="Close project details">
+                    <i b-jrjsiumu31 class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div b-jrjsiumu31 class="pm-body">
+                <p b-jrjsiumu31 class="pm-summary" id="pm-summary"></p>
+                <div b-jrjsiumu31 class="pm-section">
+                    <h3 b-jrjsiumu31 class="pm-label">Key Contributions</h3>
+                    <ul b-jrjsiumu31 class="pm-highlights" id="pm-highlights"></ul>
+                </div>
+                <div b-jrjsiumu31 class="pm-section">
+                    <h3 b-jrjsiumu31 class="pm-label">Tech Stack</h3>
+                    <div b-jrjsiumu31 class="chip-row" id="pm-tech"></div>
+                </div>
+            </div>
+            <div b-jrjsiumu31 class="pm-footer">
+                <a b-jrjsiumu31 href="#" target="_blank" rel="noopener" class="btn btn-primary" id="pm-github">
+                    <i b-jrjsiumu31 class="fa-brands fa-github"></i> View Repository
+                </a>
+                <button b-jrjsiumu31 type="button" class="btn btn-ghost" id="pm-close-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Region -->
+    <div b-jrjsiumu31 class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Portfolio Scripts -->
+    <script src="js/portfolio.js?v=2.0.0"></script>
     
 </body>
 </html>

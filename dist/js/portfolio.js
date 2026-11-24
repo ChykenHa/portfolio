@@ -1,305 +1,468 @@
-/* portfolio.js - Premium Dark Ocean Particle Animations */
+/* portfolio.js — Interactive Bento Portfolio Controls */
 
 document.addEventListener("DOMContentLoaded", () => {
-    
-    // ==========================================================================
-    // MOBILE NAV MENU TOGGLE
-    // ==========================================================================
-    const mobileToggle = document.querySelector(".mobile-toggle");
-    const mobileMenu = document.querySelector(".mobile-menu");
-    const mobileLinks = document.querySelectorAll(".mobile-link");
+    const html = document.documentElement;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const toggleMenu = () => {
-        mobileMenu.classList.toggle("open");
-        const isOpen = mobileMenu.classList.contains("open");
-        mobileToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+    // =========================================================================
+    // TOAST NOTIFICATIONS
+    // =========================================================================
+    const toastContainer = document.getElementById("toast-container");
+    const showToast = (message) => {
+        if (!toastContainer) return;
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML = `<i class="fa-solid fa-circle-check" aria-hidden="true"></i><span></span>`;
+        const span = toast.querySelector("span");
+        if (span) span.textContent = message;
+        toastContainer.appendChild(toast);
+        setTimeout(() => {
+            toast.remove();
+        }, 3200);
     };
 
-    mobileToggle.addEventListener("click", toggleMenu);
-
-    mobileLinks.forEach(link => {
-        link.addEventListener("click", () => {
-            if (mobileMenu.classList.contains("open")) {
-                toggleMenu();
-            }
-        });
-    });
-
-    document.addEventListener("click", (e) => {
-        if (mobileMenu.classList.contains("open") && 
-            !mobileMenu.contains(e.target) && 
-            !mobileToggle.contains(e.target)) {
-            toggleMenu();
+    // =========================================================================
+    // THEME TOGGLE (DARK / LIGHT)
+    // =========================================================================
+    const themeToggle = document.getElementById("theme-toggle");
+    const applyTheme = (theme) => {
+        html.dataset.theme = theme;
+        try {
+            localStorage.setItem("portfolio-theme", theme);
+        } catch (_) { /* ignore storage restrictions */ }
+        if (themeToggle) {
+            themeToggle.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
         }
-    });
-
-
-    // ==========================================================================
-    // NAVBAR SCROLL & ACTIVE LINK INDICATOR & PROGRESS
-    // ==========================================================================
-    const navbar = document.querySelector(".navbar");
-    const navLinks = document.querySelectorAll(".nav-link");
-    const sections = document.querySelectorAll("section");
-    const scrollProgress = document.querySelector(".scroll-progress");
-
-    const handleScroll = () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add("scrolled");
-        } else {
-            navbar.classList.remove("scrolled");
-        }
-
-        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        if (windowHeight > 0) {
-            const scrolledPercentage = (window.scrollY / windowHeight) * 100;
-            scrollProgress.style.width = `${scrolledPercentage}%`;
-        }
-
-        let currentSectionId = "";
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.scrollY >= sectionTop - 200) {
-                currentSectionId = section.getAttribute("id");
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove("active");
-            if (link.getAttribute("href") === `#${currentSectionId}`) {
-                link.classList.add("active");
-            }
-        });
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-
-    // ==========================================================================
-    // ORGANIC BIOLUMINESCENT PARTICLES WITH UNDERWATER WAVE SWAYS
-    // ==========================================================================
-    const canvas = document.getElementById("ocean-particles");
-    const ctx = canvas.getContext("2d");
-
-    let particlesArray = [];
-    const particleCount = 80;
-    let mouse = {
-        x: null,
-        y: null,
-        radius: 140
+    const toggleTheme = () => {
+        const next = html.dataset.theme === "light" ? "dark" : "light";
+        applyTheme(next);
+        showToast(`Switched to ${next} theme`);
     };
 
-    const resizeCanvas = () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener("resize", () => {
-        resizeCanvas();
-        initParticles();
-    });
-    resizeCanvas();
-
-    window.addEventListener("mousemove", (event) => {
-        mouse.x = event.clientX;
-        mouse.y = event.clientY;
-    });
-
-    window.addEventListener("mouseleave", () => {
-        mouse.x = null;
-        mouse.y = null;
-    });
-
-    // Particle Class with Swaying Sine Mechanics
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 3 + 0.5; // Plankton sizes
-            this.speedX = Math.random() * 0.2 - 0.1; // Baseline drift
-            this.speedY = -(Math.random() * 0.4 + 0.15); // Rising speed
-            this.opacity = Math.random() * 0.5 + 0.15;
-            this.pulseSpeed = Math.random() * 0.015 + 0.005;
-            this.pulseDir = 1;
-            
-            // Sway physics variables
-            this.swayAngle = Math.random() * Math.PI * 2;
-            this.swaySpeed = Math.random() * 0.02 + 0.005;
-            this.swayMagnitude = Math.random() * 0.6 + 0.2; // Width of sway
-        }
-
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(0, 242, 254, ${this.opacity})`;
-            ctx.shadowBlur = this.size * 4;
-            ctx.shadowColor = "rgba(0, 242, 254, 0.75)";
-            ctx.fill();
-            ctx.shadowBlur = 0; // Reset shadow for CPU performance
-        }
-
-        update() {
-            // Apply sway oscillation to x coordinate (organic wave movement)
-            this.swayAngle += this.swaySpeed;
-            const sway = Math.sin(this.swayAngle) * this.swayMagnitude;
-
-            this.x += this.speedX + sway;
-            this.y += this.speedY;
-
-            // Recycling when out of screen bounds
-            if (this.y < -20) {
-                this.y = canvas.height + 20;
-                this.x = Math.random() * canvas.width;
-                this.swayAngle = Math.random() * Math.PI * 2;
-            }
-            if (this.x < -20) {
-                this.x = canvas.width + 20;
-            } else if (this.x > canvas.width + 20) {
-                this.x = -20;
-            }
-
-            // Bioluminescent pulsing glow
-            this.opacity += this.pulseSpeed * this.pulseDir;
-            if (this.opacity > 0.65 || this.opacity < 0.15) {
-                this.pulseDir = -this.pulseDir;
-            }
-
-            // Mouse hover attraction & light link
-            if (mouse.x !== null && mouse.y !== null) {
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < mouse.radius) {
-                    // Light beam connection lines
-                    let alpha = (1 - distance / mouse.radius) * 0.15;
-                    ctx.strokeStyle = `rgba(0, 242, 254, ${alpha})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.beginPath();
-                    ctx.moveTo(this.x, this.y);
-                    ctx.lineTo(mouse.x, mouse.y);
-                    ctx.stroke();
-
-                    // Gravity pull force relative to distance
-                    const force = (mouse.radius - distance) / mouse.radius;
-                    this.x += (dx / distance) * force * 0.7;
-                    this.y += (dy / distance) * force * 0.7;
-                }
-            }
-        }
+    if (themeToggle) {
+        applyTheme(html.dataset.theme || "dark");
+        themeToggle.addEventListener("click", toggleTheme);
     }
 
-    const initParticles = () => {
-        particlesArray = [];
-        for (let i = 0; i < particleCount; i++) {
-            particlesArray.push(new Particle());
+    // =========================================================================
+    // NAVBAR SCROLL PROGRESS & ACTIVE SECTION SPY
+    // =========================================================================
+    const navbar = document.getElementById("top-nav");
+    const scrollProgress = document.querySelector(".scroll-progress");
+    const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+    const sections = Array.from(document.querySelectorAll("main section[id]"));
+
+    let scrollTicking = false;
+    const updateScrollUI = () => {
+        const y = window.scrollY || window.pageYOffset;
+        if (navbar) {
+            navbar.classList.toggle("scrolled", y > 24);
         }
+        if (scrollProgress) {
+            const maxScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const pct = maxScroll > 0 ? Math.min(100, Math.max(0, (y / maxScroll) * 100)) : 0;
+            scrollProgress.style.width = `${pct}%`;
+        }
+        scrollTicking = false;
     };
 
-    const animateParticles = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particlesArray.forEach(particle => {
-            particle.update();
-            particle.draw();
-        });
-        requestAnimationFrame(animateParticles);
+    window.addEventListener("scroll", () => {
+        if (!scrollTicking) {
+            window.requestAnimationFrame(updateScrollUI);
+            scrollTicking = true;
+        }
+    }, { passive: true });
+    updateScrollUI();
+
+    if ("IntersectionObserver" in window && sections.length && navLinks.length) {
+        const spyObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const id = entry.target.getAttribute("id");
+                navLinks.forEach((link) => {
+                    link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+                });
+            });
+        }, { rootMargin: "-35% 0px -55% 0px" });
+
+        sections.forEach((sec) => spyObserver.observe(sec));
+    }
+
+    // =========================================================================
+    // MOBILE DRAWER
+    // =========================================================================
+    const mobileToggle = document.getElementById("mobile-toggle");
+    const mobileDrawer = document.getElementById("mobile-drawer");
+    const mobileClose = document.getElementById("mobile-close");
+    const mobileLinks = document.querySelectorAll(".mobile-nav-link");
+
+    const setDrawerOpen = (open) => {
+        if (!mobileDrawer || !mobileToggle) return;
+        mobileDrawer.classList.toggle("open", open);
+        mobileDrawer.setAttribute("aria-hidden", open ? "false" : "true");
+        mobileToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        document.body.style.overflow = open ? "hidden" : "";
     };
 
-    initParticles();
-    animateParticles();
-
-
-    // ==========================================================================
-    // REVEAL ON SCROLL & SKILLS ANIMATION (INTERSECTION OBSERVER)
-    // ==========================================================================
-    const revealElements = document.querySelectorAll(".scroll-reveal");
-
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("reveal-visible");
-                
-                if (entry.target.classList.contains("skill-category-card")) {
-                    const progressBars = entry.target.querySelectorAll(".skill-progress-bar");
-                    progressBars.forEach(bar => {
-                        const targetWidth = bar.getAttribute("data-width");
-                        bar.style.width = targetWidth;
-                    });
-                }
-                observer.unobserve(entry.target);
-            }
+    if (mobileToggle && mobileDrawer) {
+        mobileToggle.addEventListener("click", () => setDrawerOpen(true));
+        if (mobileClose) mobileClose.addEventListener("click", () => setDrawerOpen(false));
+        mobileLinks.forEach((link) => link.addEventListener("click", () => setDrawerOpen(false)));
+        mobileDrawer.addEventListener("click", (e) => {
+            if (e.target === mobileDrawer) setDrawerOpen(false);
         });
-    }, {
-        threshold: 0.12,
-        rootMargin: "0px 0px -50px 0px"
-    });
+    }
 
-    revealElements.forEach(el => {
-        revealObserver.observe(el);
-    });
-
-
-    // ==========================================================================
-    // PROJECT FILTERING FUNCTIONALITY
-    // ==========================================================================
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const projectCards = document.querySelectorAll(".project-card");
-
-    filterButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            filterButtons.forEach(btn => btn.classList.remove("active"));
-            button.classList.add("active");
-
-            const filterValue = button.getAttribute("data-filter");
-
-            projectCards.forEach(card => {
-                const category = card.getAttribute("data-category");
-                
-                if (filterValue === "all" || category === filterValue) {
-                    card.classList.remove("hidden");
-                    card.style.transform = "scale(0.95)";
-                    card.style.opacity = "0.5";
-                    setTimeout(() => {
-                        card.style.transform = "scale(1)";
-                        card.style.opacity = "1";
-                        card.style.transition = "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease";
-                    }, 50);
-                } else {
-                    card.classList.add("hidden");
+    // =========================================================================
+    // SCROLL REVEAL
+    // =========================================================================
+    const revealEls = document.querySelectorAll(".reveal");
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+        revealEls.forEach((el) => el.classList.add("is-visible"));
+    } else {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
                 }
+            });
+        }, { threshold: 0.08, rootMargin: "0px 0px -30px 0px" });
+        revealEls.forEach((el) => revealObserver.observe(el));
+    }
+
+    // =========================================================================
+    // BENTO CARD SPOTLIGHT TRACKING
+    // =========================================================================
+    if (!prefersReducedMotion && window.matchMedia("(hover: hover)").matches) {
+        document.querySelectorAll(".spotlight-surface").forEach((card) => {
+            card.addEventListener("pointermove", (e) => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+                card.style.setProperty("--my", `${e.clientY - rect.top}px`);
+            });
+        });
+    }
+
+    // =========================================================================
+    // MINDCONNECT INTERACTIVE TABS
+    // =========================================================================
+    const previewTabs = document.querySelectorAll(".preview-tab");
+    const previewPanels = document.querySelectorAll(".preview-panel");
+
+    previewTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+            const target = tab.dataset.tab;
+            previewTabs.forEach((t) => {
+                const active = t === tab;
+                t.classList.toggle("active", active);
+                t.setAttribute("aria-selected", active ? "true" : "false");
+            });
+            previewPanels.forEach((panel) => {
+                const match = panel.dataset.panel === target;
+                panel.hidden = !match;
+                panel.classList.toggle("active", match);
             });
         });
     });
 
+    // =========================================================================
+    // PROJECT FILTER & DETAILS MODAL
+    // =========================================================================
+    const filterPills = document.querySelectorAll(".filter-pill");
+    const projectCards = document.querySelectorAll(".project-card");
+    const projectGroups = document.querySelectorAll(".projects-group");
+    const projectCountBadge = document.getElementById("project-count");
 
-    // ==========================================================================
-    // CONTACT FORM INTERACTION & FEEDBACK (ENGLISH)
-    // ==========================================================================
-    const contactForm = document.getElementById("portfolio-contact-form");
-    const feedbackMessage = document.querySelector(".form-feedback-message");
+    filterPills.forEach((pill) => {
+        pill.addEventListener("click", () => {
+            const filter = pill.dataset.filter || "all";
+            filterPills.forEach((p) => p.classList.toggle("active", p === pill));
 
-    contactForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        
-        const submitBtn = contactForm.querySelector(".btn-submit");
-        const btnOriginalText = submitBtn.innerHTML;
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span>Sending... <i class="fa-solid fa-spinner animate-pulse"></i></span>';
-        
-        setTimeout(() => {
-            feedbackMessage.innerHTML = 'Thank you! Your message has been sent successfully. I will get back to you shortly.';
-            feedbackMessage.className = "form-feedback-message success";
-            
-            contactForm.reset();
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = btnOriginalText;
+            let visibleTotal = 0;
+            projectCards.forEach((card) => {
+                const show = filter === "all" || card.dataset.category === filter;
+                card.hidden = !show;
+                if (show) visibleTotal += 1;
+            });
 
-            setTimeout(() => {
-                feedbackMessage.className = "form-feedback-message";
-                feedbackMessage.innerHTML = "";
-            }, 6000);
-            
-        }, 1500);
+            projectGroups.forEach((group) => {
+                const anyVisible = group.querySelectorAll(".project-card:not([hidden])").length > 0;
+                group.hidden = !anyVisible;
+            });
+
+            if (projectCountBadge) {
+                projectCountBadge.textContent = String(visibleTotal);
+            }
+        });
+    });
+
+    // Parse embedded project JSON
+    let projectsMap = new Map();
+    const projectsDataEl = document.getElementById("projects-data");
+    if (projectsDataEl && projectsDataEl.textContent) {
+        try {
+            const list = JSON.parse(projectsDataEl.textContent);
+            list.forEach((item) => {
+                if (item && item.id) projectsMap.set(item.id, item);
+            });
+        } catch (err) {
+            console.error("Failed to parse projects-data JSON:", err);
+        }
+    }
+
+    const projectModal = document.getElementById("project-modal");
+    const pmTitle = document.getElementById("pm-title");
+    const pmPeriod = document.getElementById("pm-period");
+    const pmRole = document.getElementById("pm-role");
+    const pmSummary = document.getElementById("pm-summary");
+    const pmHighlights = document.getElementById("pm-highlights");
+    const pmTech = document.getElementById("pm-tech");
+    const pmGithub = document.getElementById("pm-github");
+    const pmClose = document.getElementById("pm-close");
+    const pmCloseBtn = document.getElementById("pm-close-btn");
+
+    const closeProjectModal = () => {
+        if (!projectModal) return;
+        projectModal.hidden = true;
+        document.body.style.overflow = "";
+    };
+
+    const openProjectModal = (projectId) => {
+        const project = projectsMap.get(projectId);
+        if (!project || !projectModal) return;
+
+        if (pmTitle) pmTitle.textContent = project.name || "";
+        if (pmPeriod) pmPeriod.textContent = project.period || "";
+        if (pmRole) pmRole.textContent = project.role || "";
+        if (pmSummary) pmSummary.textContent = project.summary || "";
+        if (pmGithub) pmGithub.setAttribute("href", project.githubUrl || "#");
+
+        if (pmHighlights) {
+            pmHighlights.innerHTML = "";
+            (project.highlights || []).forEach((text) => {
+                const li = document.createElement("li");
+                li.textContent = text;
+                pmHighlights.appendChild(li);
+            });
+        }
+
+        if (pmTech) {
+            pmTech.innerHTML = "";
+            (project.techTags || []).forEach((tag) => {
+                const span = document.createElement("span");
+                span.className = "tech-chip";
+                span.textContent = tag;
+                pmTech.appendChild(span);
+            });
+        }
+
+        projectModal.hidden = false;
+        document.body.style.overflow = "hidden";
+    };
+
+    document.querySelectorAll(".view-details-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            openProjectModal(btn.dataset.projectId);
+        });
+    });
+
+    if (pmClose) pmClose.addEventListener("click", closeProjectModal);
+    if (pmCloseBtn) pmCloseBtn.addEventListener("click", closeProjectModal);
+    if (projectModal) {
+        projectModal.addEventListener("click", (e) => {
+            if (e.target === projectModal) closeProjectModal();
+        });
+    }
+
+    // =========================================================================
+    // COPY TO CLIPBOARD
+    // =========================================================================
+    const copyText = async (text, label) => {
+        if (!text) return;
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+            } else {
+                const ta = document.createElement("textarea");
+                ta.value = text;
+                ta.style.position = "fixed";
+                ta.style.opacity = "0";
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand("copy");
+                ta.remove();
+            }
+            showToast(`${label || "Text"} copied to clipboard`);
+        } catch (_) {
+            showToast("Unable to copy to clipboard");
+        }
+    };
+
+    document.addEventListener("click", (e) => {
+        const trigger = e.target.closest("[data-copy]");
+        if (!trigger) return;
+        copyText(trigger.dataset.copy, trigger.dataset.copyLabel || "Value");
+    });
+
+    // =========================================================================
+    // CONTACT COMPOSER (REAL MAILTO + COPY)
+    // =========================================================================
+    const composer = document.getElementById("contact-composer");
+    const copyComposedBtn = document.getElementById("copy-composed-btn");
+
+    const buildComposedPayload = () => {
+        if (!composer) return null;
+        const recipient = composer.dataset.recipient || "lephungha1203@gmail.com";
+        const name = (composer.querySelector("#c-name")?.value || "").trim();
+        const email = (composer.querySelector("#c-email")?.value || "").trim();
+        const subject = (composer.querySelector("#c-subject")?.value || "").trim() || "Portfolio Inquiry";
+        const message = (composer.querySelector("#c-message")?.value || "").trim();
+        const body = `Hi Le Phung Ha,\n\n${message}\n\nBest regards,\n${name}${email ? ` (${email})` : ""}`;
+        return { recipient, subject, body };
+    };
+
+    if (composer) {
+        composer.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const payload = buildComposedPayload();
+            if (!payload) return;
+            const mailtoUrl = `mailto:${encodeURIComponent(payload.recipient)}?subject=${encodeURIComponent(payload.subject)}&body=${encodeURIComponent(payload.body)}`;
+            window.location.href = mailtoUrl;
+            showToast("Opening your email client...");
+        });
+    }
+
+    if (copyComposedBtn) {
+        copyComposedBtn.addEventListener("click", () => {
+            const payload = buildComposedPayload();
+            if (!payload) return;
+            const formatted = `To: ${payload.recipient}\nSubject: ${payload.subject}\n\n${payload.body}`;
+            copyText(formatted, "Formatted message");
+        });
+    }
+
+    // =========================================================================
+    // COMMAND PALETTE (CTRL+K / CMD+K)
+    // =========================================================================
+    const cmdPalette = document.getElementById("cmd-palette");
+    const cmdOpenBtn = document.getElementById("cmd-open-btn");
+    const cmdInput = document.getElementById("cmd-input");
+    const cmdList = document.getElementById("cmd-list");
+
+    const commands = [
+        { label: "Go to Top / Hero", tag: "Section", icon: "fa-solid fa-house", action: () => { window.location.hash = "#hero"; } },
+        { label: "Go to About & Credentials", tag: "Section", icon: "fa-solid fa-user", action: () => { window.location.hash = "#about"; } },
+        { label: "Go to Industry Experience", tag: "Section", icon: "fa-solid fa-briefcase", action: () => { window.location.hash = "#experience"; } },
+        { label: "Go to MindConnect Research", tag: "Section", icon: "fa-solid fa-flask", action: () => { window.location.hash = "#research"; } },
+        { label: "Go to Projects", tag: "Section", icon: "fa-solid fa-code-branch", action: () => { window.location.hash = "#projects"; } },
+        { label: "Go to Technical & Soft Skills", tag: "Section", icon: "fa-solid fa-sliders", action: () => { window.location.hash = "#skills"; } },
+        { label: "Go to Contact", tag: "Section", icon: "fa-solid fa-envelope", action: () => { window.location.hash = "#contact"; } },
+        { label: "Toggle Dark / Light Theme", tag: "Action", icon: "fa-solid fa-circle-half-stroke", action: toggleTheme },
+        { label: "Copy Email (lephungha1203@gmail.com)", tag: "Copy", icon: "fa-regular fa-copy", action: () => copyText("lephungha1203@gmail.com", "Email address") },
+        { label: "Copy Phone (034 737 2061)", tag: "Copy", icon: "fa-solid fa-phone", action: () => copyText("034 737 2061", "Phone number") },
+        { label: "Download CV (PDF)", tag: "External", icon: "fa-solid fa-file-arrow-down", action: () => window.open("Le-Phung-Ha-CV.pdf", "_blank", "noopener") },
+        { label: "Open GitHub (ChykenHa)", tag: "External", icon: "fa-brands fa-github", action: () => window.open("https://github.com/ChykenHa", "_blank", "noopener") },
+        { label: "Open LinkedIn Profile", tag: "External", icon: "fa-brands fa-linkedin-in", action: () => window.open("https://www.linkedin.com/in/h%C3%A0-l%C3%AA-ph%C3%B9ng-24110137b/", "_blank", "noopener") }
+    ];
+
+    let filteredCommands = [...commands];
+    let selectedIdx = 0;
+
+    const closeCmdPalette = () => {
+        if (!cmdPalette) return;
+        cmdPalette.hidden = true;
+        document.body.style.overflow = "";
+    };
+
+    const renderCommands = () => {
+        if (!cmdList) return;
+        cmdList.innerHTML = "";
+        if (!filteredCommands.length) {
+            const empty = document.createElement("li");
+            empty.className = "cmd-item";
+            empty.textContent = "No matching commands.";
+            cmdList.appendChild(empty);
+            return;
+        }
+
+        filteredCommands.forEach((cmd, idx) => {
+            const li = document.createElement("li");
+            li.className = `cmd-item${idx === selectedIdx ? " selected" : ""}`;
+            li.setAttribute("role", "option");
+            li.innerHTML = `<i class="${cmd.icon}" aria-hidden="true"></i><span></span><span class="cmd-item-tag"></span>`;
+            const spans = li.querySelectorAll("span");
+            if (spans[0]) spans[0].textContent = cmd.label;
+            if (spans[1]) spans[1].textContent = cmd.tag;
+            li.addEventListener("click", () => {
+                closeCmdPalette();
+                cmd.action();
+            });
+            cmdList.appendChild(li);
+        });
+    };
+
+    const openCmdPalette = () => {
+        if (!cmdPalette) return;
+        filteredCommands = [...commands];
+        selectedIdx = 0;
+        if (cmdInput) cmdInput.value = "";
+        renderCommands();
+        cmdPalette.hidden = false;
+        document.body.style.overflow = "hidden";
+        if (cmdInput) cmdInput.focus();
+    };
+
+    if (cmdOpenBtn) cmdOpenBtn.addEventListener("click", openCmdPalette);
+    if (cmdPalette) {
+        cmdPalette.addEventListener("click", (e) => {
+            if (e.target === cmdPalette) closeCmdPalette();
+        });
+    }
+
+    if (cmdInput) {
+        cmdInput.addEventListener("input", () => {
+            const q = cmdInput.value.trim().toLowerCase();
+            filteredCommands = commands.filter((c) => c.label.toLowerCase().includes(q) || c.tag.toLowerCase().includes(q));
+            selectedIdx = 0;
+            renderCommands();
+        });
+
+        cmdInput.addEventListener("keydown", (e) => {
+            if (!filteredCommands.length) return;
+            if (e.key === "ArrowDown") {
+                e.preventDefault();
+                selectedIdx = (selectedIdx + 1) % filteredCommands.length;
+                renderCommands();
+            } else if (e.key === "ArrowUp") {
+                e.preventDefault();
+                selectedIdx = (selectedIdx - 1 + filteredCommands.length) % filteredCommands.length;
+                renderCommands();
+            } else if (e.key === "Enter") {
+                e.preventDefault();
+                const chosen = filteredCommands[selectedIdx];
+                if (chosen) {
+                    closeCmdPalette();
+                    chosen.action();
+                }
+            }
+        });
+    }
+
+    // Global keyboard shortcuts
+    document.addEventListener("keydown", (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+            e.preventDefault();
+            if (cmdPalette && !cmdPalette.hidden) closeCmdPalette();
+            else openCmdPalette();
+            return;
+        }
+        if (e.key === "Escape") {
+            if (cmdPalette && !cmdPalette.hidden) closeCmdPalette();
+            if (projectModal && !projectModal.hidden) closeProjectModal();
+            if (mobileDrawer && mobileDrawer.classList.contains("open")) setDrawerOpen(false);
+        }
     });
 });

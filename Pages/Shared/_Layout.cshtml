@@ -1,91 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Le Phung Ha - Portfolio. Backend Developer & DevOps Intern specializing in ASP.NET Core and AI/NLP integration." />
-    <title>@ViewData["Title"] - Le Phung Ha | Software Developer Portfolio</title>
-    
-    <!-- Google Fonts: Space Grotesk (headings) & Sora (body/accents) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom CSS -->
+    <meta name="description" content="Le Phung Ha — Software Developer Fresher specializing in C#, ASP.NET Core, Database Systems, and DevOps. Interned at Samsung R&amp;D Center Vietnam &amp; Wisdom Brain." />
+    <meta property="og:title" content="Le Phung Ha | Software Developer Portfolio" />
+    <meta property="og:description" content="Software Developer Fresher · C#, ASP.NET Core, SQL Server, Docker/Kubernetes, and AI/NLP Research." />
+    <meta property="og:type" content="website" />
+    <title>@ViewData["Title"] — Le Phung Ha | Software Developer</title>
+
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+
+    <!-- Zero-FOUC Theme Bootstrapper -->
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('portfolio-theme');
+                document.documentElement.dataset.theme = (saved === 'light' || saved === 'dark') ? saved : 'dark';
+            } catch (e) {
+                document.documentElement.dataset.theme = 'dark';
+            }
+        })();
+    </script>
+
+    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome 6.5.2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <!-- Portfolio Design System -->
     <link rel="stylesheet" href="~/css/portfolio.css" asp-append-version="true" />
 </head>
-<body class="dark-ocean-theme">
-    
-    <!-- Bioluminescent Background Canvas -->
-    <canvas id="ocean-particles"></canvas>
-    
-    <!-- Morphing Liquid Blobs (Liquid Glass Foundation) -->
-    <div class="liquid-blob blob-1"></div>
-    <div class="liquid-blob blob-2"></div>
-    <div class="liquid-blob blob-3"></div>
-    <div class="liquid-blob blob-4"></div>
+<body>
+    <!-- Subtle Architectural Background -->
+    <div class="ambient-grid" aria-hidden="true"></div>
+    <div class="ambient-glow" aria-hidden="true"></div>
 
-    <!-- Navigation Header -->
-    <header class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">
-                <span class="logo-icon"><i class="fa-solid fa-water"></i></span>
-                <span class="logo-text">LE PHUNG HA<span class="highlight">.</span></span>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Floating Glass Navigation -->
+    <header class="navbar" id="top-nav">
+        <div class="container nav-inner">
+            <a href="#hero" class="brand" aria-label="Le Phung Ha Home">
+                <span class="brand-monogram">LH</span>
+                <span class="brand-name">Le Phung Ha<span class="brand-dot">.</span></span>
             </a>
-            
-            <nav class="nav-menu">
-                <a href="#hero" class="nav-link active">Home</a>
+
+            <nav class="nav-links" aria-label="Primary Navigation">
                 <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
                 <a href="#research" class="nav-link">Research</a>
                 <a href="#projects" class="nav-link">Projects</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </nav>
-            
+
             <div class="nav-actions">
-                <a href="~/Le-Phung-Ha-TopCV.vn-250526.75757.pdf" target="_blank" class="btn btn-nav-download">
-                    <span>Download CV <i class="fa-solid fa-download"></i></span>
+                <button type="button" class="cmd-trigger" id="cmd-open-btn" aria-label="Open quick command palette">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span class="cmd-trigger-label">Jump</span>
+                    <kbd>Ctrl K</kbd>
+                </button>
+
+                <button type="button" class="icon-btn" id="theme-toggle" aria-label="Toggle color theme" aria-pressed="false">
+                    <i class="fa-solid fa-sun theme-icon-sun" aria-hidden="true"></i>
+                    <i class="fa-solid fa-moon theme-icon-moon" aria-hidden="true"></i>
+                </button>
+
+                <a href="~/Le-Phung-Ha-CV.pdf" target="_blank" rel="noopener" class="btn btn-primary btn-sm nav-cv-btn">
+                    <i class="fa-solid fa-file-arrow-down"></i>
+                    <span>Download CV</span>
                 </a>
-                <button class="mobile-toggle" aria-label="Toggle navigation">
-                    <i class="fa-solid fa-bars"></i>
+
+                <button type="button" class="icon-btn mobile-toggle" id="mobile-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-drawer">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
-        <div class="scroll-progress"></div>
     </header>
 
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu">
-        <a href="#hero" class="mobile-link">Home</a>
-        <a href="#about" class="mobile-link">About</a>
-        <a href="#research" class="mobile-link">Research</a>
-        <a href="#projects" class="mobile-link">Projects</a>
-        <a href="#skills" class="mobile-link">Skills</a>
-        <a href="#contact" class="mobile-link">Contact</a>
-        <a href="~/Le-Phung-Ha-TopCV.vn-250526.75757.pdf" target="_blank" class="btn btn-download-mobile">Download CV <i class="fa-solid fa-download"></i></a>
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+        <div class="mobile-drawer-inner">
+            <div class="mobile-drawer-header">
+                <span class="brand-name">Navigation</span>
+                <button type="button" class="icon-btn" id="mobile-close" aria-label="Close navigation menu">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav-list" aria-label="Mobile Navigation">
+                <a href="#hero" class="mobile-nav-link">Home</a>
+                <a href="#about" class="mobile-nav-link">About</a>
+                <a href="#experience" class="mobile-nav-link">Experience</a>
+                <a href="#research" class="mobile-nav-link">Research</a>
+                <a href="#projects" class="mobile-nav-link">Projects</a>
+                <a href="#skills" class="mobile-nav-link">Skills</a>
+                <a href="#contact" class="mobile-nav-link">Contact</a>
+            </nav>
+            <div class="mobile-drawer-footer">
+                <a href="~/Le-Phung-Ha-CV.pdf" target="_blank" rel="noopener" class="btn btn-primary btn-block">
+                    <i class="fa-solid fa-file-arrow-down"></i> Download CV (PDF)
+                </a>
+            </div>
+        </div>
     </div>
 
-    <!-- Main Content Body -->
+    <!-- Main Content -->
     @RenderBody()
 
     <!-- Footer -->
-    <footer class="footer-area">
-        <div class="container footer-container">
-            <p class="copyright">&copy; 2026 Le Phung Ha. Crafted with <span class="text-glow">Dark Ocean</span> & <i class="fa-solid fa-heart animate-pulse text-coral"></i></p>
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="brand-monogram sm">LH</span>
+                <div>
+                    <p class="footer-copy">&copy; 2026 Le Phung Ha. Engineered with ASP.NET Core.</p>
+                    <p class="footer-sub">Hoa Khanh Nam, Da Nang, Vietnam</p>
+                </div>
+            </div>
             <div class="footer-links">
-                <a href="#hero">Back to top</a>
-                <a href="~/Le-Phung-Ha-TopCV.vn-250526.75757.pdf" target="_blank">View CV PDF</a>
-                <a href="https://github.com/ChykenHa" target="_blank">GitHub</a>
+                <a href="#hero">Top</a>
+                <a href="~/Le-Phung-Ha-CV.pdf" target="_blank" rel="noopener">CV PDF</a>
+                <a href="https://github.com/ChykenHa" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://www.linkedin.com/in/h%C3%A0-l%C3%AA-ph%C3%B9ng-24110137b/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="mailto:lephungha1203@gmail.com">Email</a>
             </div>
         </div>
     </footer>
 
-    <!-- Custom Portfolio JS -->
-    <script src="~/js/portfolio.js" asp-append-version="true"></script>
+    <!-- Command Palette Modal -->
+    <div class="modal-backdrop" id="cmd-palette" role="dialog" aria-modal="true" aria-labelledby="cmd-title" hidden>
+        <div class="modal-dialog cmd-dialog">
+            <div class="cmd-input-wrap">
+                <i class="fa-solid fa-terminal" aria-hidden="true"></i>
+                <input type="text" id="cmd-input" placeholder="Type a command or section (e.g. Experience, Copy Email, Theme)..." aria-label="Search commands" autocomplete="off" />
+                <kbd>Esc</kbd>
+            </div>
+            <h2 id="cmd-title" class="sr-only">Quick Command Palette</h2>
+            <ul class="cmd-list" id="cmd-list" role="listbox"></ul>
+        </div>
+    </div>
 
+    <!-- Project Details Modal -->
+    <div class="modal-backdrop" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="pm-title" hidden>
+        <div class="modal-dialog project-dialog">
+            <div class="pm-header">
+                <div>
+                    <span class="pm-period mono-pill" id="pm-period"></span>
+                    <h2 class="pm-title" id="pm-title"></h2>
+                    <p class="pm-role" id="pm-role"></p>
+                </div>
+                <button type="button" class="icon-btn" id="pm-close" aria-label="Close project details">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="pm-body">
+                <p class="pm-summary" id="pm-summary"></p>
+                <div class="pm-section">
+                    <h3 class="pm-label">Key Contributions</h3>
+                    <ul class="pm-highlights" id="pm-highlights"></ul>
+                </div>
+                <div class="pm-section">
+                    <h3 class="pm-label">Tech Stack</h3>
+                    <div class="chip-row" id="pm-tech"></div>
+                </div>
+            </div>
+            <div class="pm-footer">
+                <a href="#" target="_blank" rel="noopener" class="btn btn-primary" id="pm-github">
+                    <i class="fa-brands fa-github"></i> View Repository
+                </a>
+                <button type="button" class="btn btn-ghost" id="pm-close-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Region -->
+    <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Portfolio Scripts -->
+    <script src="~/js/portfolio.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

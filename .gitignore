@@ -3,3 +3,6 @@ obj/
 .vs/
 *.user
 _ReSharper.Caches/
+__pycache__/
+*.pyc
+tmp_*

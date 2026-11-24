@@ -1,497 +1,609 @@
 @page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Portfolio";
 }
 
 <main>
-    <!-- Hero Section -->
+    <!-- 1. HERO SECTION -->
     <section id="hero" class="hero-section">
-        <div class="container hero-container">
-            <div class="hero-content">
-                <div class="badge-glow fade-in-up">
-                    <span class="badge-text"><i class="fa-solid fa-code-fork"></i> Backend & DevOps Engineer</span>
+        <div class="container hero-grid">
+            <div class="hero-copy">
+                <div class="status-pill reveal">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <span>Open to Software Developer &amp; Backend Roles · Da Nang, VN</span>
                 </div>
-                <h1 class="hero-title fade-in-up delay-1">
-                    Hi, I am <br>
-                    <span class="gradient-text text-glow">Le Phung Ha</span>
+
+                <h1 class="hero-title reveal">
+                    @Model.Profile.FullName
                 </h1>
-                <p class="hero-subtitle fade-in-up delay-2">
-                    Software Engineering student at Duy Tan University. Specializing in <strong>C# & ASP.NET Core</strong>, building resilient backends, database architectures, and integrating Artificial Intelligence (AI/NLP) solutions.
+
+                <p class="hero-role reveal">
+                    @Model.Profile.Title &middot; <span class="text-accent">ASP.NET Core &amp; Backend Systems</span>
                 </p>
-                <div class="hero-actions fade-in-up delay-3">
-                    <a href="#projects" class="btn btn-primary btn-glow">Explore Projects</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+
+                <p class="hero-summary reveal">
+                    Software Engineering student at <strong>@Model.Profile.University</strong> with hands-on internship experience at
+                    <strong>Samsung R&amp;D Center Vietnam</strong> and <strong>Wisdom Brain</strong>. Focused on building resilient C# / ASP.NET Core backends,
+                    relational databases, and containerized DevOps workflows.
+                </p>
+
+                <div class="hero-cta-row reveal">
+                    <a href="#projects" class="btn btn-primary">
+                        <span>Explore Projects</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="~/@Model.Profile.CvFileName" target="_blank" rel="noopener" class="btn btn-secondary">
+                        <i class="fa-solid fa-file-arrow-down"></i>
+                        <span>Download CV</span>
+                    </a>
+                    <button type="button" class="btn btn-ghost" data-copy="@Model.Profile.Email" data-copy-label="Email address">
+                        <i class="fa-regular fa-copy"></i>
+                        <span>Copy Email</span>
+                    </button>
                 </div>
-                
-                <div class="hero-stats fade-in-up delay-4">
-                    <div class="stat-item">
-                        <span class="stat-num">3+</span>
-                        <span class="stat-lbl">Months Interning</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-num">11+</span>
-                        <span class="stat-lbl">GitHub Repos</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-num">3.25</span>
-                        <span class="stat-lbl">University GPA</span>
-                    </div>
+
+                <div class="hero-social-row reveal">
+                    <a href="@Model.Profile.GithubUrl" target="_blank" rel="noopener" class="social-pill">
+                        <i class="fa-brands fa-github"></i> GitHub / @Model.Profile.GithubHandle
+                    </a>
+                    <a href="@Model.Profile.LinkedInUrl" target="_blank" rel="noopener" class="social-pill">
+                        <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+                    </a>
+                    <span class="social-pill muted">
+                        <i class="fa-solid fa-location-dot"></i> @Model.Profile.Location
+                    </span>
                 </div>
             </div>
-            
-            <div class="hero-visual fade-in-up delay-2">
-                <div class="ocean-sphere-wrapper">
-                    <div class="ocean-sphere">
-                        <div class="wave wave-1"></div>
-                        <div class="wave wave-2"></div>
-                        <div class="wave wave-3"></div>
-                        <div class="sphere-core">
-                            <i class="fa-solid fa-terminal sphere-icon"></i>
+
+            <!-- Identity Bento Card -->
+            <aside class="hero-bento spotlight-surface reveal" aria-label="Developer Quick Profile">
+                <div class="bento-profile-head">
+                    <div class="avatar-frame">
+                        <img src="~/images/avatar.jpg" alt="Le Phung Ha portrait" class="avatar-img" loading="eager" />
+                    </div>
+                    <div class="bento-profile-meta">
+                        <span class="mono-pill accent">C# / .NET · DevOps</span>
+                        <h2 class="bento-name">@Model.Profile.FullName</h2>
+                        <p class="bento-sub">@Model.Profile.University (@Model.Profile.EducationPeriod)</p>
+                    </div>
+                </div>
+
+                <div class="bento-metrics-grid">
+                    @foreach (var stat in Model.HeroStats)
+                    {
+                        <div class="metric-tile">
+                            <span class="metric-val">@stat.Value</span>
+                            <span class="metric-lbl">@stat.Label</span>
+                            <span class="metric-sub">@stat.Sub</span>
                         </div>
-                    </div>
-                    <div class="floating-tech tech-csharp" title="C#"><span class="font-tech">C#</span></div>
-                    <div class="floating-tech tech-dotnet" title=".NET"><i class="fa-solid fa-cubes"></i></div>
-                    <div class="floating-tech tech-docker" title="Docker"><i class="fa-brands fa-docker"></i></div>
-                    <div class="floating-tech tech-database" title="SQL Server"><i class="fa-solid fa-database"></i></div>
+                    }
                 </div>
-            </div>
+
+                <div class="code-card">
+                    <div class="code-card-bar">
+                        <span class="dot red"></span>
+                        <span class="dot amber"></span>
+                        <span class="dot green"></span>
+                        <span class="code-filename">developer.json</span>
+                    </div>
+                    <pre class="code-body"><code>{
+  <span class="tok-k">"focus"</span>: [<span class="tok-s">"ASP.NET Core"</span>, <span class="tok-s">"EF Core"</span>, <span class="tok-s">"SQL Server"</span>],
+  <span class="tok-k">"devops"</span>: [<span class="tok-s">"Docker"</span>, <span class="tok-s">"Kubernetes"</span>, <span class="tok-s">"Grafana"</span>],
+  <span class="tok-k">"mobile"</span>: [<span class="tok-s">"Java"</span>, <span class="tok-s">"Kotlin"</span>, <span class="tok-s">"MVVM"</span>],
+  <span class="tok-k">"award"</span>: <span class="tok-s">"3rd Prize · IT Research 2026"</span>
+}</code></pre>
+                </div>
+            </aside>
         </div>
-        
-        <a href="#about" class="scroll-indicator" aria-label="Scroll Down">
-            <span class="mouse">
-                <span class="wheel"></span>
-            </span>
-            <span class="arrow-scroll"></span>
-        </a>
     </section>
 
-    <!-- About Me Section -->
-    <section id="about" class="about-section section-padding">
+    <!-- 2. ABOUT & CREDENTIALS BENTO -->
+    <section id="about" class="section">
         <div class="container">
-            <div class="section-header scroll-reveal">
-                <span class="section-tag">About Me</span>
-                <h2 class="section-title">My Journey & Ambitions</h2>
-                <div class="section-line"></div>
+            <div class="section-header reveal">
+                <span class="section-eyebrow">01 / Profile</span>
+                <h2 class="section-title">About &amp; Credentials</h2>
+                <p class="section-desc">Academic foundation, career objective, and verified achievements.</p>
             </div>
-            
-            <div class="about-grid">
-                <div class="about-image-card scroll-reveal">
-                    <div class="avatar-glow-wrapper">
-                        <div class="avatar-bg"></div>
-                        <div class="avatar-fallback">
-                            <img src="~/images/avatar.jpg" alt="Le Phung Ha" class="avatar-img" />
-                        </div>
-                    </div>
-                    
-                    <div class="fun-fact-box">
-                        <h4 class="fun-fact-title"><i class="fa-solid fa-wand-magic-sparkles text-glow"></i> Outside the Code</h4>
-                        <p class="fun-fact-text">
-                            When I'm not coding, I collect Mecha action figures, set up freshwater aquariums, or jump into tactical Valorant matches with my team!
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="about-info-content scroll-reveal delay-1">
-                    <h3 class="about-greeting">Architecting Optimal and Reliable Systems</h3>
-                    <p class="about-bio">
-                        I am currently pursuing a Bachelor's in Software Engineering (2023 - 2027) at Duy Tan University. Aspiring to build a career as a professional <strong>C# / Backend Developer</strong>, I actively research web architecture, efficient DevOps pipelines, and smart applications incorporating Natural Language Processing (NLP).
+
+            <div class="about-bento-grid">
+                <!-- Career Objective -->
+                <article class="bento-card span-7 spotlight-surface reveal">
+                    <div class="card-kicker"><i class="fa-solid fa-bullseye"></i> Career Objective</div>
+                    <h3 class="card-heading">Building dependable backend &amp; database systems</h3>
+                    <p class="card-copy">
+                        @Model.Profile.Objective
                     </p>
-                    
-                    <div class="education-card">
-                        <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                        <div class="edu-details">
-                            <span class="edu-year">2023 - 2027</span>
-                            <h4 class="edu-school">Duy Tan University (DTU)</h4>
-                            <p class="edu-degree">Software Engineer | GPA: 3.25 / 4.0</p>
-                            <ul class="edu-coursework">
-                                <li><i class="fa-solid fa-circle-check"></i> Data Structures & Algorithms</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Database Systems (SQL/NoSQL)</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Modern Web Development</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <p class="card-copy secondary">
+                        Through internships at <strong>Samsung R&amp;D Center Vietnam</strong> and <strong>Wisdom Brain</strong>,
+                        alongside independent full-stack AI research, I bridge clean C# backend architecture with containerized operations and practical problem-solving.
+                    </p>
+                </article>
 
-                    <div class="experience-card">
-                        <div class="exp-icon"><i class="fa-solid fa-briefcase"></i></div>
-                        <div class="exp-details">
-                            <span class="exp-year">Feb 2026 - May 2026 (3 Months)</span>
-                            <h4 class="exp-school">DevOps Engineer Intern</h4>
-                            <p class="edu-degree">Wisdom Brain</p>
-                            <ul class="edu-coursework">
-                                <li><i class="fa-solid fa-circle-check"></i> Configured containerized services with Docker & Kubernetes.</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Built and optimized automated CI/CD deployment pipelines.</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Managed server environments, Linux networking, and system logs.</li>
-                            </ul>
-                        </div>
+                <!-- Education -->
+                <article class="bento-card span-5 spotlight-surface reveal">
+                    <div class="card-kicker"><i class="fa-solid fa-graduation-cap"></i> Education</div>
+                    <div class="edu-header">
+                        <h3 class="card-heading">@Model.Profile.University</h3>
+                        <span class="mono-pill">@Model.Profile.EducationPeriod</span>
                     </div>
-                    
-                    <div class="languages-box">
-                        <div class="lang-item">
-                            <span class="lang-title"><i class="fa-solid fa-earth-americas"></i> English Proficiency</span>
-                            <span class="lang-val">IELTS 6.5</span>
-                        </div>
-                        <div class="lang-item">
-                            <span class="lang-title"><i class="fa-solid fa-award"></i> TOEIC Certifications</span>
-                            <span class="lang-val">2026 Professional</span>
-                        </div>
+                    <p class="edu-major">@Model.Profile.Major</p>
+                    <div class="gpa-callout">
+                        <span class="gpa-label">Cumulative GPA</span>
+                        <span class="gpa-value">@Model.Profile.Gpa</span>
                     </div>
-                </div>
+                </article>
+
+                <!-- Honors & Award -->
+                <article class="bento-card span-6 award-card spotlight-surface reveal">
+                    <div class="card-kicker amber"><i class="fa-solid fa-trophy"></i> Honors &amp; Awards · @Model.Award.Year</div>
+                    <h3 class="card-heading">@Model.Award.Title</h3>
+                    <p class="card-copy">
+                        Recognized for <strong>MindConnect</strong> — an independent cross-platform social network integrating Python NLP models, Google Gemini, and smartwatch biometric PEWS tracking.
+                    </p>
+                </article>
+
+                <!-- Certifications & Beyond Code -->
+                <article class="bento-card span-6 spotlight-surface reveal">
+                    <div class="card-kicker"><i class="fa-solid fa-certificate"></i> Certifications &amp; Beyond Code</div>
+                    <div class="cert-list">
+                        @foreach (var cert in Model.Certifications)
+                        {
+                            <div class="cert-pill">
+                                <span class="cert-name">@cert.Title</span>
+                                <span class="cert-meta">@cert.Year &middot; @cert.Meta</span>
+                            </div>
+                        }
+                    </div>
+                    <p class="beyond-note">
+                        <i class="fa-solid fa-sparkles"></i>
+                        Outside of engineering: collecting Mecha action figures, aquascaping freshwater tanks, and tactical Valorant matches.
+                    </p>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Research Spotlight Section -->
-    <section id="research" class="research-section section-padding waves-bg">
+    <!-- 3. EXPERIENCE SECTION -->
+    <section id="experience" class="section section-alt">
         <div class="container">
-            <div class="section-header scroll-reveal">
-                <span class="section-tag">Research Spotlight</span>
-                <h2 class="section-title">AI & Health Social Network</h2>
-                <div class="section-line"></div>
+            <div class="section-header reveal">
+                <span class="section-eyebrow">02 / Experience</span>
+                <h2 class="section-title">Industry Internships</h2>
+                <p class="section-desc">Practical software engineering and DevOps delivery in production-oriented environments.</p>
             </div>
-            
-            <div class="spotlight-card scroll-reveal">
-                <div class="spotlight-badge">
-                    <i class="fa-solid fa-trophy"></i> @Model.MindConnect.Award
-                </div>
-                
-                <div class="spotlight-grid">
-                    <div class="spotlight-text-content">
-                        <span class="project-meta">Independent Research & Development</span>
-                        <h3 class="spotlight-title">@Model.MindConnect.Name</h3>
-                        <p class="spotlight-description">
-                            @Model.MindConnect.Description
-                        </p>
-                        
-                        <div class="spotlight-features">
-                            <div class="feature-item">
-                                <span class="f-icon"><i class="fa-solid fa-brain"></i></span>
-                                <div class="f-text">
-                                    <h5>Vietnamese NLP Classifier</h5>
-                                    <p>Trained localized Python text-classification models to recognize markers of depression.</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <span class="f-icon"><i class="fa-solid fa-network-wired"></i></span>
-                                <div class="f-text">
-                                    <h5>Cross-Platform Backend</h5>
-                                    <p>Configured unified ASP.NET Core APIs to serve Razor web views and React Native clients simultaneously.</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <span class="f-icon"><i class="fa-solid fa-robot"></i></span>
-                                <div class="f-text">
-                                    <h5>Hybrid LLM Support</h5>
-                                    <p>Integrated GPT and Gemini engines for chatbot support, mental health advice, and real-time guidance.</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="tech-tags">
-                            @foreach (var tag in Model.MindConnect.TechTags)
-                            {
-                                <span class="tag">@tag</span>
-                            }
-                        </div>
-                        
-                        <div class="spotlight-links">
-                            <a href="@Model.MindConnect.DemoUrl" target="_blank" class="btn btn-primary btn-sm"><i class="fa-solid fa-globe"></i> Live Web Demo</a>
-                            <a href="@Model.MindConnect.GithubUrl" target="_blank" class="btn btn-secondary btn-sm"><i class="fa-brands fa-github"></i> Explore Source Code</a>
-                        </div>
-                    </div>
-                    
-                    <div class="spotlight-visual">
-                        <div class="glass-device">
-                            <div class="device-header">
-                                <span class="dot red"></span>
-                                <span class="dot yellow"></span>
-                                <span class="dot green"></span>
-                                <span class="device-title">mindconnect.io</span>
-                            </div>
-                            <div class="device-body">
-                                <div class="mockup-chart-container">
-                                    <div class="mockup-header-ui">
-                                        <span class="avatar-mini"></span>
-                                        <span class="text-line-mini"></span>
-                                    </div>
-                                    <div class="mockup-post">
-                                        <p class="mockup-post-txt">Feeling extremely overwhelmed with work lately...</p>
-                                        <span class="sentiment-indicator indicator-red animate-pulse">Depression Signal Detected</span>
-                                    </div>
-                                    <div class="mockup-ai-chat">
-                                        <div class="chat-bubble user">How can I manage stress better during finals?</div>
-                                        <div class="chat-bubble ai">
-                                            <span class="ai-spark"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Companion:</span> Try applying the Pomodoro technique and taking 5-minute walks to reset...
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects-section section-padding">
-        <div class="container">
-            <div class="section-header scroll-reveal">
-                <span class="section-tag">My Creations</span>
-                <h2 class="section-title">Selected Projects</h2>
-                <div class="section-line"></div>
-            </div>
-            
-            <!-- Project Filter Control -->
-            <div class="project-filters scroll-reveal">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="web">Web & Backend</button>
-                <button class="filter-btn" data-filter="mobile">Mobile App</button>
-                <button class="filter-btn" data-filter="other">Desktop & Desktop</button>
-            </div>
-            
-            <!-- Projects Grid -->
-            <div class="projects-grid">
-                @foreach (var project in Model.Projects)
+            <div class="timeline">
+                @foreach (var exp in Model.Experiences)
                 {
-                    <div class="project-card scroll-reveal" data-category="@project.Category">
-                        <div class="project-card-visual @project.VisualClass">
-                            <i class="@project.IconClass project-icon"></i>
+                    <article class="timeline-item reveal">
+                        <div class="timeline-marker" aria-hidden="true">
+                            <i class="@exp.IconClass"></i>
                         </div>
-                        <div class="project-card-body">
-                            <div class="project-role">
-                                @if (project.Role.Contains("Leader"))
-                                {
-                                    <i class="fa-solid fa-crown text-glow"></i>
-                                }
-                                else
-                                {
-                                    <i class="fa-solid fa-user-gear"></i>
-                                }
-                                @project.Role
+                        <div class="timeline-card spotlight-surface">
+                            <div class="exp-top">
+                                <div>
+                                    <span class="exp-company">@exp.Company</span>
+                                    <h3 class="exp-role">@exp.Role</h3>
+                                </div>
+                                <div class="exp-badges">
+                                    <span class="mono-pill">@exp.Period</span>
+                                    <span class="mono-pill accent">@exp.CategoryTag</span>
+                                </div>
                             </div>
-                            <h3 class="project-name">@project.Name</h3>
-                            <p class="project-desc">@project.Description</p>
-                            <div class="project-tech">
+
+                            <ul class="exp-bullets">
+                                @foreach (var bullet in exp.Highlights)
+                                {
+                                    <li>@bullet</li>
+                                }
+                            </ul>
+
+                            <div class="chip-row">
+                                @foreach (var tag in exp.TechTags)
+                                {
+                                    <span class="tech-chip">@tag</span>
+                                }
+                            </div>
+                        </div>
+                    </article>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. RESEARCH SPOTLIGHT: MINDCONNECT -->
+    <section id="research" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-eyebrow">03 / Research Spotlight</span>
+                <h2 class="section-title">MindConnect Social Network</h2>
+                <p class="section-desc">@Model.MindConnect.Event &middot; @Model.MindConnect.Period</p>
+            </div>
+
+            <div class="research-shell spotlight-surface reveal">
+                <div class="research-main">
+                    <div class="research-badges">
+                        <span class="award-ribbon">
+                            <i class="fa-solid fa-award"></i> @Model.MindConnect.Award
+                        </span>
+                        <span class="mono-pill">@Model.MindConnect.Role</span>
+                    </div>
+
+                    <h3 class="research-title">@Model.MindConnect.Name</h3>
+                    <p class="research-desc">@Model.MindConnect.Description</p>
+
+                    <div class="pillars-grid">
+                        @foreach (var pillar in Model.MindConnect.Pillars)
+                        {
+                            <div class="pillar-card">
+                                <div class="pillar-icon"><i class="@pillar.IconClass"></i></div>
+                                <div>
+                                    <h4 class="pillar-title">@pillar.Title</h4>
+                                    <p class="pillar-desc">@pillar.Description</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="chip-row">
+                        @foreach (var tag in Model.MindConnect.TechTags)
+                        {
+                            <span class="tech-chip">@tag</span>
+                        }
+                    </div>
+
+                    <div class="research-actions">
+                        <a href="@Model.MindConnect.GithubUrl" target="_blank" rel="noopener" class="btn btn-primary">
+                            <i class="fa-brands fa-github"></i>
+                            <span>Explore Source Code</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Interactive 3-Tab Product Preview -->
+                <div class="research-preview" aria-label="MindConnect Interactive Architecture Preview">
+                    <div class="preview-window">
+                        <div class="preview-topbar">
+                            <div class="window-dots" aria-hidden="true">
+                                <span class="dot red"></span>
+                                <span class="dot amber"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="preview-url">mindconnect.app / telemetry</span>
+                        </div>
+
+                        <div class="preview-tabs" role="tablist" aria-label="MindConnect Feature Previews">
+                            <button type="button" class="preview-tab active" role="tab" aria-selected="true" data-tab="nlp">NLP Classifier</button>
+                            <button type="button" class="preview-tab" role="tab" aria-selected="false" data-tab="pews">Smartwatch &rarr; PEWS</button>
+                            <button type="button" class="preview-tab" role="tab" aria-selected="false" data-tab="gemini">Gemini AI</button>
+                        </div>
+
+                        <div class="preview-panels">
+                            <!-- Panel 1: NLP -->
+                            <div class="preview-panel active" data-panel="nlp" role="tabpanel">
+                                <div class="mock-post">
+                                    <div class="mock-user">
+                                        <span class="mock-avatar">U</span>
+                                        <div>
+                                            <strong>User Post #1042</strong>
+                                            <span>Web &amp; React Native Sync</span>
+                                        </div>
+                                        <span class="signal-badge danger">Signal Detected</span>
+                                    </div>
+                                    <p class="mock-text">
+                                        "Lately I feel exhausted every morning and disconnected from my classes..."
+                                    </p>
+                                </div>
+                                <div class="mock-telemetry-row">
+                                    <div class="mini-stat">
+                                        <span>Endpoint</span>
+                                        <code>POST /api/nlp/classify</code>
+                                    </div>
+                                    <div class="mini-stat">
+                                        <span>Sentiment</span>
+                                        <strong class="text-rose">High Risk (0.87)</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Panel 2: Smartwatch PEWS -->
+                            <div class="preview-panel" data-panel="pews" role="tabpanel" hidden>
+                                <div class="biometrics-grid">
+                                    <div class="bio-tile">
+                                        <span class="bio-code">Hv</span>
+                                        <span class="bio-name">Heart Rate</span>
+                                        <strong class="bio-val">104 <small>bpm</small></strong>
+                                    </div>
+                                    <div class="bio-tile">
+                                        <span class="bio-code">St</span>
+                                        <span class="bio-name">Sleep Time</span>
+                                        <strong class="bio-val">4.5 <small>hrs</small></strong>
+                                    </div>
+                                    <div class="bio-tile">
+                                        <span class="bio-code">Dv</span>
+                                        <span class="bio-name">Emotion State</span>
+                                        <strong class="bio-val text-amber">Stressed</strong>
+                                    </div>
+                                    <div class="bio-tile highlight">
+                                        <span class="bio-code">PEWS</span>
+                                        <span class="bio-name">Alert Tier</span>
+                                        <strong class="bio-val text-accent">Monitored</strong>
+                                    </div>
+                                </div>
+                                <p class="mock-caption">Smartwatch telemetry (Hv, St, Dv) synced to PEWS monitoring pipeline.</p>
+                            </div>
+
+                            <!-- Panel 3: Gemini AI -->
+                            <div class="preview-panel" data-panel="gemini" role="tabpanel" hidden>
+                                <div class="mock-chat">
+                                    <div class="chat-msg user">
+                                        I have been struggling to sleep before project deadlines.
+                                    </div>
+                                    <div class="chat-msg bot">
+                                        <span class="bot-tag"><i class="fa-solid fa-sparkles"></i> Google Gemini Support</span>
+                                        <p>Let's break tonight into a 25-minute wind-down routine and prioritize one small task for tomorrow morning.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. PROJECTS SECTION -->
+    <section id="projects" class="section section-alt">
+        <div class="container">
+            <div class="section-header-row reveal">
+                <div class="section-header compact">
+                    <span class="section-eyebrow">04 / Selected Work</span>
+                    <h2 class="section-title">Engineering Projects</h2>
+                    <p class="section-desc">Full-stack ASP.NET Core applications, mobile apps, and desktop software.</p>
+                </div>
+
+                <div class="filter-bar" role="group" aria-label="Filter projects by category">
+                    <button type="button" class="filter-pill active" data-filter="all">All <span class="filter-count" id="project-count">@Model.Projects.Count</span></button>
+                    <button type="button" class="filter-pill" data-filter="web">Backend &amp; Web</button>
+                    <button type="button" class="filter-pill" data-filter="mobile">Mobile</button>
+                    <button type="button" class="filter-pill" data-filter="desktop">Desktop &amp; UI</button>
+                </div>
+            </div>
+
+            <!-- Featured CV Projects -->
+            <div class="projects-group" data-group="featured">
+                <h3 class="group-label">Featured CV Projects</h3>
+                <div class="projects-grid featured-grid">
+                    @foreach (var project in Model.Projects.Where(p => p.IsFeatured))
+                    {
+                        <article class="project-card featured spotlight-surface reveal" data-category="@project.Category" data-project-id="@project.Id">
+                            <div class="project-card-top">
+                                <div class="project-icon-box">
+                                    <i class="@project.IconClass"></i>
+                                </div>
+                                <span class="mono-pill">@project.Period</span>
+                            </div>
+
+                            <span class="project-role-tag">@project.Role</span>
+                            <h4 class="project-title">@project.Name</h4>
+                            <p class="project-summary">@project.Summary</p>
+
+                            <ul class="project-mini-list">
+                                @foreach (var item in project.Highlights.Take(3))
+                                {
+                                    <li>@item</li>
+                                }
+                            </ul>
+
+                            <div class="chip-row">
                                 @foreach (var tag in project.TechTags)
                                 {
-                                    <span>@tag</span>
+                                    <span class="tech-chip">@tag</span>
                                 }
                             </div>
-                            <div class="project-footer">
-                                <a href="@project.GithubUrl" target="_blank" class="project-link"><i class="fa-brands fa-github"></i> Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                                @if (!string.IsNullOrEmpty(project.DemoUrl))
+
+                            <div class="project-actions">
+                                <a href="@project.GithubUrl" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                                    <i class="fa-brands fa-github"></i> GitHub
+                                </a>
+                                <button type="button" class="btn btn-ghost btn-sm view-details-btn" data-project-id="@project.Id">
+                                    <span>View Details</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
+                            </div>
+                        </article>
+                    }
+                </div>
+            </div>
+
+            <!-- Additional GitHub Projects -->
+            <div class="projects-group" data-group="additional">
+                <h3 class="group-label">Additional GitHub Showcase</h3>
+                <div class="projects-grid compact-grid">
+                    @foreach (var project in Model.Projects.Where(p => !p.IsFeatured))
+                    {
+                        <article class="project-card spotlight-surface reveal" data-category="@project.Category" data-project-id="@project.Id">
+                            <div class="project-card-top">
+                                <div class="project-icon-box">
+                                    <i class="@project.IconClass"></i>
+                                </div>
+                                <span class="mono-pill">@project.Period</span>
+                            </div>
+
+                            <span class="project-role-tag">@project.Role</span>
+                            <h4 class="project-title">@project.Name</h4>
+                            <p class="project-summary">@project.Summary</p>
+
+                            <div class="chip-row">
+                                @foreach (var tag in project.TechTags)
                                 {
-                                    <a href="@project.DemoUrl" target="_blank" class="project-link" style="margin-left: 15px;"><i class="fa-brands fa-github"></i> Sub-Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                    <span class="tech-chip">@tag</span>
                                 }
                             </div>
+
+                            <div class="project-actions">
+                                <a href="@project.GithubUrl" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                                    <i class="fa-brands fa-github"></i> GitHub
+                                </a>
+                                <button type="button" class="btn btn-ghost btn-sm view-details-btn" data-project-id="@project.Id">
+                                    <span>Details</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
+                            </div>
+                        </article>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. TECHNICAL & SOFT SKILLS -->
+    <section id="skills" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-eyebrow">05 / Capabilities</span>
+                <h2 class="section-title">Technical &amp; Soft Skills</h2>
+                <p class="section-desc">Core stack highlighted with <span class="inline-dot" aria-hidden="true"></span> indicators across backend, databases, and DevOps.</p>
+            </div>
+
+            <div class="skills-bento-grid">
+                @foreach (var group in Model.SkillGroups)
+                {
+                    <article class="skill-card spotlight-surface reveal">
+                        <div class="skill-card-head">
+                            <span class="skill-icon"><i class="@group.IconClass"></i></span>
+                            <h3 class="skill-group-title">@group.Title</h3>
                         </div>
+                        <div class="skill-badges-wrap">
+                            @foreach (var skill in group.Items)
+                            {
+                                <span class="skill-badge @(skill.IsCore ? "core" : "")">
+                                    @if (skill.IsCore)
+                                    {
+                                        <span class="core-dot" aria-hidden="true"></span>
+                                    }
+                                    @skill.Name
+                                </span>
+                            }
+                        </div>
+                    </article>
+                }
+            </div>
+
+            <div class="soft-skills-strip reveal">
+                @foreach (var soft in Model.SoftSkills)
+                {
+                    <div class="soft-skill-card spotlight-surface">
+                        <div class="soft-head">
+                            <i class="@soft.IconClass"></i>
+                            <h4>@soft.Title</h4>
+                        </div>
+                        <p>@soft.Description</p>
                     </div>
                 }
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills-section section-padding waves-bg-inverted">
+    <!-- 7. CONTACT SECTION -->
+    <section id="contact" class="section section-alt">
         <div class="container">
-            <div class="section-header scroll-reveal">
-                <span class="section-tag">Technical Competencies</span>
-                <h2 class="section-title">My Toolbox</h2>
-                <div class="section-line"></div>
+            <div class="section-header reveal">
+                <span class="section-eyebrow">06 / Contact</span>
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-desc">Available for C# / ASP.NET Core Software Developer roles and engineering collaborations.</p>
             </div>
-            
-            <div class="skills-grid">
-                <!-- Column 1: Languages -->
-                <div class="skill-category-card scroll-reveal">
-                    <h3 class="category-title"><i class="fa-solid fa-code"></i> Languages</h3>
-                    <div class="skill-list">
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">C# (.NET)</span>
-                                <span class="skill-percentage">Core Stack</span>
-                            </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="85%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Java & Kotlin</span>
-                                <span class="skill-percentage">Proficient</span>
-                            </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="75%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">SQL</span>
-                                <span class="skill-percentage">Proficient</span>
-                            </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="80%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Python & JavaScript</span>
-                                <span class="skill-percentage">Core & AI</span>
-                            </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="70%"></div></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Column 2: Frameworks & Web -->
-                <div class="skill-category-card scroll-reveal delay-1">
-                    <h3 class="category-title"><i class="fa-solid fa-cubes"></i> Frameworks</h3>
-                    <div class="skill-list">
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">ASP.NET Core (Web/API)</span>
-                                <span class="skill-percentage">Core Stack</span>
-                            </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="85%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Entity Framework Core</span>
-                                <span class="skill-percentage">Proficient</span>
-                            </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="80%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">React Native (Mobile)</span>
-                                <span class="skill-percentage">Familiar</span>
-                            </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="60%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Razor Pages / HTML & CSS</span>
-                                <span class="skill-percentage">Proficient</span>
-                            </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="75%"></div></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Column 3: DB & DevOps -->
-                <div class="skill-category-card scroll-reveal delay-2">
-                    <h3 class="category-title"><i class="fa-solid fa-gears"></i> Systems & DevOps</h3>
-                    <div class="skill-list">
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">SQL Server</span>
-                                <span class="skill-percentage">Core Stack</span>
-                            </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="85%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">MongoDB & PostgreSQL</span>
-                                <span class="skill-percentage">Familiar</span>
-                            </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="65%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Docker & Kubernetes</span>
-                                <span class="skill-percentage">Learning</span>
-                            </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="60%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Git & CI-CD Pipelines</span>
-                                <span class="skill-percentage">Proficient</span>
-                            </div>
-                            <div class="skill-bar"><div class="skill-progress-bar" data-width="80%"></div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section section-padding">
-        <div class="container">
-            <div class="section-header scroll-reveal">
-                <span class="section-tag">Contact</span>
-                <h2 class="section-title">Let's Build Something Together</h2>
-                <div class="section-line"></div>
-            </div>
-            
             <div class="contact-grid">
-                <!-- Info details -->
-                <div class="contact-info scroll-reveal">
-                    <h3 class="info-title">Let's discuss your next project!</h3>
-                    <p class="info-text">
-                        I am currently open to internship positions, backend developer roles, or project collaborations. Reach out and I will reply within 24 hours.
-                    </p>
-                    
-                    <div class="info-list">
-                        <div class="info-link-card">
-                            <span class="info-icon"><i class="fa-solid fa-phone"></i></span>
-                            <div class="info-card-text">
-                                <span>Phone Number</span>
-                                <a href="tel:0347372061">034 737 2061</a>
-                            </div>
+                <div class="contact-cards reveal">
+                    <div class="contact-card spotlight-surface">
+                        <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="contact-info">
+                            <span class="contact-label">Email</span>
+                            <a href="mailto:@Model.Profile.Email" class="contact-val">@Model.Profile.Email</a>
                         </div>
-                        
-                        <div class="info-link-card">
-                            <span class="info-icon"><i class="fa-solid fa-envelope"></i></span>
-                            <div class="info-card-text">
-                                <span>Email Address</span>
-                                <a href="mailto:lephungha1203@gmail.com">lephungha1203@gmail.com</a>
-                            </div>
+                        <button type="button" class="icon-btn" data-copy="@Model.Profile.Email" data-copy-label="Email address" aria-label="Copy email address">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <div class="contact-card spotlight-surface">
+                        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div class="contact-info">
+                            <span class="contact-label">Phone</span>
+                            <a href="@Model.Profile.PhoneHref" class="contact-val">@Model.Profile.Phone</a>
                         </div>
-                        
-                        <div class="info-link-card">
-                            <span class="info-icon"><i class="fa-solid fa-location-dot"></i></span>
-                            <div class="info-card-text">
-                                <span>Location</span>
-                                <p>Hoa Khanh Nam, Da Nang, Vietnam</p>
-                            </div>
+                        <button type="button" class="icon-btn" data-copy="@Model.Profile.Phone" data-copy-label="Phone number" aria-label="Copy phone number">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <div class="contact-card spotlight-surface">
+                        <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="contact-info">
+                            <span class="contact-label">Location</span>
+                            <p class="contact-val">@Model.Profile.Location</p>
                         </div>
                     </div>
-                    
-                    <div class="social-links-box">
-                        <a href="https://github.com/ChykenHa" target="_blank" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/h%C3%A0-l%C3%AA-ph%C3%B9ng-24110137b/" target="_blank" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="mailto:lephungha1203@gmail.com" class="social-icon" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+
+                    <div class="contact-links-bar">
+                        <a href="@Model.Profile.GithubUrl" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                            <i class="fa-brands fa-github"></i> GitHub
+                        </a>
+                        <a href="@Model.Profile.LinkedInUrl" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                            <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+                        </a>
+                        <a href="~/@Model.Profile.CvFileName" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                            <i class="fa-solid fa-file-pdf"></i> Resume PDF
+                        </a>
                     </div>
                 </div>
-                
-                <!-- Contact Form -->
-                <div class="contact-form-container scroll-reveal delay-1">
-                    <form id="portfolio-contact-form" class="glass-form">
+
+                <!-- Real Mailto & Copy Composer -->
+                <div class="composer-card spotlight-surface reveal">
+                    <h3 class="composer-title">Quick Message Composer</h3>
+                    <p class="composer-sub">Opens directly in your default email app or copies a formatted message to your clipboard.</p>
+
+                    <form id="contact-composer" data-recipient="@Model.Profile.Email">
                         <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Your Name</label>
-                                <input type="text" id="name" name="name" required placeholder="John Doe">
+                            <div class="form-field">
+                                <label for="c-name">Your Name</label>
+                                <input type="text" id="c-name" name="name" required placeholder="Nguyen Van A" />
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email" name="email" required placeholder="john@example.com">
+                            <div class="form-field">
+                                <label for="c-email">Your Email</label>
+                                <input type="email" id="c-email" name="email" required placeholder="recruiter@company.com" />
                             </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required placeholder="Project Opportunity / Questions">
+
+                        <div class="form-field">
+                            <label for="c-subject">Subject</label>
+                            <input type="text" id="c-subject" name="subject" required placeholder="Software Developer Opportunity" />
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
+
+                        <div class="form-field">
+                            <label for="c-message">Message</label>
+                            <textarea id="c-message" name="message" rows="4" required placeholder="Hi Ha, we would love to discuss..."></textarea>
                         </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-submit btn-glow">
-                            <span>Send Message <i class="fa-solid fa-paper-plane"></i></span>
-                        </button>
-                        
-                        <div class="form-feedback-message"></div>
+
+                        <div class="composer-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>Open in Email App</span>
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="copy-composed-btn">
+                                <i class="fa-regular fa-copy"></i>
+                                <span>Copy Message</span>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<!-- Embedded Strongly-Typed Project Data for Modal -->
+<script type="application/json" id="projects-data">@Html.Raw(Model.ProjectsJson)</script>
